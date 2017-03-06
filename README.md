@@ -29,7 +29,7 @@ In SQLMD:
 **Generate random temperature.**
 * Output = \_temperature = random number between 30-100
 
-**Generate random forcast**  
+**Generate random forecast**  
 * Output: \_weather = Cloudy;
 
 **Generate price per pitcher between $0.50 - $3.00.**
