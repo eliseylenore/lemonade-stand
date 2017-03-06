@@ -34,9 +34,30 @@ namespace LemonadeStand
 
             bool result = (forecastArray.Contains(forecast));
 
-            Console.WriteLine(forecast);
-
             Assert.Equal(true, result);
+        }
+
+        [Fact]
+        public static void Play_CupsSoldPositiveInteger_true()
+        {
+          Game testGame = new Game();
+          Dictionary<string, int> testDictionary = testGame.Play(5, 10);
+
+          int cupsSold = testDictionary["cupsSold"];
+          bool result = (cupsSold > 0);
+          Assert.Equal(true, result);
+        }
+
+//TODO: write tests to test distribution of cupsSold and remainingMoney
+        [Fact]
+        public static void Play_RemainingMoneyPositiveInteger_true()
+        {
+          Game testGame = new Game();
+          Dictionary<string, int> testDictionary = testGame.Play(5, 10);
+
+          int remainingMoney = testDictionary["remainingMoney"];
+          bool result = (remainingMoney > 0);
+          Assert.Equal(true, result);
         }
 
         public void Dispose()

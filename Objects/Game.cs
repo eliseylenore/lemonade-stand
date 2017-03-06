@@ -42,10 +42,34 @@ namespace LemonadeStand
       return Forecasts;
     }
 
-    // public static string[] GetForecastArray()
-    // {
-    //   return _forecasts;
-    // }
+    public Dictionary<string, int> Play(int pricePerCup, int numberOfPitchers)
+    {
+      int totalAmountSpent = numberOfPitchers*_pitcherPrice;
+
+      int totalCupsMade = numberOfPitchers*_cupsPerPitcher;
+
+      int forecastNumber = Array.IndexOf(Forecasts, _forecast);
+
+      int maxBought = (forecastNumber*_temperature)/pricePerCup;
+
+      int cupsSold = 0;
+      if(totalCupsMade <= maxBought)
+      {
+        cupsSold = totalCupsMade;
+      }
+      else
+      {
+        cupsSold = maxBought;
+      }
+
+      int totalAmountMade = cupsSold*pricePerCup;
+
+      int remainingMoney = totalAmountMade - totalAmountSpent;
+      Dictionary<string, int> play = new Dictionary<string, int> {};
+      play.Add("cupsSold", cupsSold);
+      play.Add("remainingMoney", remainingMoney);
+      return play;
+    }
 
     // public static DeleteAll()
     // {
