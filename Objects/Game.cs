@@ -6,6 +6,7 @@ namespace LemonadeStand
 {
   public class Game
   {
+<<<<<<< HEAD
     private int _temperature;
     private int _pitcherPrice;
     private int _cupsPerPitcher;
@@ -39,7 +40,8 @@ namespace LemonadeStand
 
     // public static DeleteAll()
     // {
-    //   
+    //
     // }
+
   }
 }

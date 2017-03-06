@@ -42,6 +42,19 @@ In SQLMD:
 * Input: Game.Play(pricePerCup, numberOfPitchers);
 * Output: cups sold = 25;
 
+**Save score to database**
+* Input: Game.Save();
+* Output: add saved score = $30.00 to database;
+
+**Save score to database with username**
+* Input: Game.Save(username);
+* Output: add saved score and username to database;
+
+**Save score to database with username and password**
+* Input: user saves Game
+* Output: update saved score to database where username and password = player's username and password
+
+
 
 ## Known Bugs
 
