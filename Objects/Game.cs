@@ -18,7 +18,7 @@ namespace LemonadeStand
       _temperature = rnd.Next(30,100);
       _forecast = Forecasts[rnd.Next(0, Forecasts.Length)];
       _pitcherPrice = rnd.Next(1,3);
-      _cupsPerPitcher = 10;
+    private string[] _forecasts = ["sunny", "partly cloudy", "cloudy", "rain" ];
     }
 
     public int GetTemperature()
