@@ -34,9 +34,18 @@ namespace LemonadeStand
 
             bool result = (forecastArray.Contains(forecast));
 
-            Console.WriteLine(forecast);
-
             Assert.Equal(true, result);
+        }
+
+        [Fact]
+        public static void Find_ReturnsGameBasedOnId()
+        {
+            Game testGame = new Game();
+            Console.WriteLine(testGame.GetId());
+            
+            Game result = Game.Find(testGame.GetId());
+
+            Assert.Equal(testGame, result);
         }
 
         public void Dispose()

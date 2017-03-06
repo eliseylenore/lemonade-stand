@@ -6,7 +6,7 @@
 
 ## Description
 
-_Lemonade Stand is an education game that inspires young entrepreneurs to take risks and fundraise. The player has a certain time period to turn a profit and meet their goals. Each day presents the player with new circumstances, including weather and the cost to make a pitcher of lemonade. The player must decide how much lemonade to make and at what price. Lemonade stand simulates a day of sales and returns the cups sold and the profit for the day. At the end of the time period, the program returns whether the player met their goals and how they did in comparison with other players.._
+_Lemonade Stand is an educational game that inspires young entrepreneurs to take risks and fundraise. The player has a certain time period to turn a profit and meet their goals. Each day presents the player with new circumstances, including weather and the cost to make a pitcher of lemonade. The player must decide how much lemonade to make and at what price. Lemonade stand simulates a day of sales and returns the cups sold and the profit for the day. At the end of the time period, the program returns whether the player met their goals and how they did in comparison with other players._
 
 ## Setup/Installation Requirements
 
