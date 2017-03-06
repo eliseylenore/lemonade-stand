@@ -6,18 +6,18 @@ namespace LemonadeStand
 {
   public class Game
   {
-<<<<<<< HEAD
     private int _temperature;
     private int _pitcherPrice;
     private int _cupsPerPitcher;
     private string _forecast;
-    private string[] _forecasts = ["sunny", "partly cloudy", "cloudy", "rain" ];
+    private string[] _forecasts = new string[] {"sunny", "partly cloudy", "cloudy", "rain"};
+    Random rnd = new Random();
 
     public Game()
     {
-      _temperature = Random.Next(30,100);
-      _forecast = _forecasts[Random.Next(0, forecasts.length)];
-      _pitcherPrice = Random.Next(1,3);
+      _temperature = rnd.Next(30,100);
+      _forecast = _forecasts[rnd.Next(0, _forecasts.Length)];
+      _pitcherPrice = rnd.Next(1,3);
       _cupsPerPitcher = 10;
     }
 
@@ -33,7 +33,7 @@ namespace LemonadeStand
     {
       return _cupsPerPitcher;
     }
-    public string[] GetForecast()
+    public string GetForecast()
     {
       return _forecast;
     }

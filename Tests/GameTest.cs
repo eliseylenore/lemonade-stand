@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace LemonadeStand
 {
-  public class GameTest 
+  public class GameTest
   {
     public GameTest()
     {
@@ -14,14 +14,15 @@ namespace LemonadeStand
     }
 
     [Fact]
-    public static GetTemperature_ReturnsARandomValueBetween30And100_true {
+    public static void GetTemperature_ReturnsARandomValueBetween30And100_true()
+    {
       Game testGame = new Game();
       int temp = testGame.GetTemperature();
 
-      bool result = (temp <= 30 && temp > 100);
-
+      bool result = (temp >= 30 && temp < 100);
+      Console.WriteLine(temp);
       Assert.Equal(true, result);
-    };
+    }
 
   }
 }
