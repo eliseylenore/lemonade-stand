@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace LemonadeStand
 {
@@ -23,23 +24,23 @@ namespace LemonadeStand
             Assert.Equal(true, result);
         }
 
-        // [Fact]
-        // public static void GetForecast_ReturnsRandomValueFromForecastArray_true()
-        // {
-        //     Game testGame = new Game();
-        //
-        //     string forecast = testGame.GetForecast();
-        //     string[] forecastArray = Game.Forecasts;
-        //
-        //     bool result = (forecastArray.Contains(forecast));
-        //
-        //     Console.WriteLine(forecast);
-        //
-        //     Assert.Equal(true, result);
-        // }
-        //
-        // public void Dispose()
-        // {
+        [Fact]
+        public static void GetForecast_ReturnsRandomValueFromForecastArray_true()
+        {
+            Game testGame = new Game();
+
+            string forecast = testGame.GetForecast();
+            string[] forecastArray = Game.GetForecastArray();
+
+            bool result = (forecastArray.Contains(forecast));
+
+            Console.WriteLine(forecast);
+
+            Assert.Equal(true, result);
+        }
+
+        public void Dispose()
+        {
 
         }
     }

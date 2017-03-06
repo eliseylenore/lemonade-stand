@@ -10,7 +10,7 @@ namespace LemonadeStand
     private int _pitcherPrice;
     private int _cupsPerPitcher;
     private string _forecast;
-    public string[] Forecasts = new string[] {"sunny", "partly cloudy", "cloudy", "rain"};
+    public static string[] Forecasts = new string[] {"sunny", "partly cloudy", "cloudy", "rain"};
     Random rnd = new Random();
 
     public Game()
@@ -18,7 +18,7 @@ namespace LemonadeStand
       _temperature = rnd.Next(30,100);
       _forecast = Forecasts[rnd.Next(0, Forecasts.Length)];
       _pitcherPrice = rnd.Next(1,3);
-    private string[] _forecasts = ["sunny", "partly cloudy", "cloudy", "rain" ];
+      _cupsPerPitcher = 10;
     }
 
     public int GetTemperature()
@@ -37,10 +37,10 @@ namespace LemonadeStand
     {
       return _forecast;
     }
-    // public static string[] GetForecastArray()
-    // {
-    //   return _forecasts;
-    // }
+    public static string[] GetForecastArray()
+    {
+      return Forecasts;
+    }
 
     // public static DeleteAll()
     // {
