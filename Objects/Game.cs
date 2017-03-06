@@ -42,6 +42,11 @@ namespace LemonadeStand
       return Forecasts;
     }
 
+    // public static string[] GetForecastArray()
+    // {
+    //   return _forecasts;
+    // }
+
     // public static DeleteAll()
     // {
     //
