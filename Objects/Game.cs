@@ -6,6 +6,8 @@ namespace LemonadeStand
 {
     public class Game
     {
+        private static List<Game> _games = new List<Game> {};
+        private int _id;
         private int _temperature;
         private int _pitcherPrice;
         private int _cupsPerPitcher;
@@ -15,12 +17,18 @@ namespace LemonadeStand
 
         public Game()
         {
+            _id = _games.Count;
+            _games.Add(this);
             _temperature = rnd.Next(30,100);
             _forecast = Forecasts[rnd.Next(0, Forecasts.Length)];
             _pitcherPrice = rnd.Next(1,3);
             _cupsPerPitcher = 10;
         }
 
+        public int GetId()
+        {
+            return _id;
+        }
         public int GetTemperature()
         {
             return _temperature;
@@ -40,6 +48,10 @@ namespace LemonadeStand
         public static string[] GetForecastArray()
         {
             return Forecasts;
+        }
+        public static Game Find(int searchId)
+        {
+            return _games[searchId];
         }
 
         public Dictionary<string, int> Play(int pricePerCup, int numberOfPitchers)
@@ -66,16 +78,9 @@ namespace LemonadeStand
 
             int remainingMoney = totalAmountMade - totalAmountSpent;
             Dictionary<string, int> play = new Dictionary<string, int> {};
-            Console.WriteLine(cupsSold);
             play.Add("cupsSold", cupsSold);
             play.Add("remainingMoney", remainingMoney);
             return play;
         }
-
-        // public static DeleteAll()
-        // {
-        //
-        // }
-
     }
 }

@@ -81,6 +81,17 @@ namespace LemonadeStand
             Assert.Equal(cupsSold, actual);
         }
 
+        [Fact]
+        public static void Find_ReturnsGameBasedOnId()
+        {
+            Game testGame = new Game();
+
+            Game result = Game.Find(testGame.GetId());
+
+            Assert.Equal(testGame, result);
+
+        }
+
         public void Dispose()
         {
 
