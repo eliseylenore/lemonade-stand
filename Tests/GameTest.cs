@@ -40,24 +40,45 @@ namespace LemonadeStand
         [Fact]
         public static void Play_CupsSoldPositiveInteger_true()
         {
-          Game testGame = new Game();
-          Dictionary<string, int> testDictionary = testGame.Play(5, 10);
+            Game testGame = new Game();
+            Dictionary<string, int> testDictionary = testGame.Play(5, 10);
 
-          int cupsSold = testDictionary["cupsSold"];
-          bool result = (cupsSold > 0);
-          Assert.Equal(true, result);
+            int cupsSold = testDictionary["cupsSold"];
+            bool result = (cupsSold >= 0);
+            Assert.Equal(true, result);
         }
 
-//TODO: write tests to test distribution of cupsSold and remainingMoney
+        //TODO: write tests to test distribution of cupsSold and remainingMoney
         [Fact]
-        public static void Play_RemainingMoneyPositiveInteger_true()
+        public static void Play_MaxBoughtIsWeatherDividedByPricePerCup_true()
         {
-          Game testGame = new Game();
-          Dictionary<string, int> testDictionary = testGame.Play(5, 10);
+            Game testGame = new Game();
+            int pricePerCup = 5;
+            int numberOfPitchers = 10;
+            Dictionary<string, int> testDictionary = testGame.Play(pricePerCup, numberOfPitchers);
 
-          int remainingMoney = testDictionary["remainingMoney"];
-          bool result = (remainingMoney > 0);
-          Assert.Equal(true, result);
+            string forecast = testGame.GetForecast();
+            string[] Forecasts = Game.GetForecastArray();
+            int forecastNumber = Array.IndexOf(Forecasts, forecast);
+            int temperature = testGame.GetTemperature();
+
+            int maxBought = (forecastNumber*temperature)/pricePerCup;
+
+            int cupsPerPitcher = testGame.GetCupsPerPitcher();
+            int totalCupsMade = cupsPerPitcher*numberOfPitchers;
+
+            int cupsSold = 0;
+            if(totalCupsMade <= maxBought)
+            {
+                cupsSold = totalCupsMade;
+            }
+            else
+            {
+                cupsSold = maxBought;
+            }
+
+            int actual = testDictionary["cupsSold"];
+            Assert.Equal(cupsSold, actual);
         }
 
         public void Dispose()
