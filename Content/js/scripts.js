@@ -30,7 +30,7 @@ $(document).ready(function() {
         costPerPitcher = parseInt($("#pitcher-price").text());
         if(pitchers > 0)
         {
-            newMoney = playerMoney - (costPerPitcher * pitchers);
+            var newMoney = playerMoney - (costPerPitcher * pitchers);
             $("#player-money").text(newMoney);
             console.log(costPerPitcher);
             console.log(pitchers);
