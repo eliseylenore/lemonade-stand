@@ -8,6 +8,7 @@ namespace LemonadeStand
     {
         private static List<Game> _games = new List<Game> {};
         private int _id;
+        private int _playerId;
         private int _temperature;
         private decimal _pitcherPrice;
         private int _cupsPerPitcher;
@@ -15,9 +16,10 @@ namespace LemonadeStand
         public static string[] Forecasts = new string[] {"sunny", "partly cloudy", "cloudy", "rain"};
         Random rnd = new Random();
 
-        public Game()
+        public Game(int PlayerId)
         {
             _id = _games.Count;
+            _playerId = PlayerId;
             _games.Add(this);
             _temperature = rnd.Next(30,100);
             _forecast = Forecasts[rnd.Next(0, Forecasts.Length)];
@@ -28,6 +30,10 @@ namespace LemonadeStand
         public int GetId()
         {
             return _id;
+        }
+        public int GetPlayerId()
+        {
+            return _playerId;
         }
         public int GetTemperature()
         {

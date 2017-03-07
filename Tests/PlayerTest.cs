@@ -37,6 +37,17 @@ namespace LemonadeStand
             Assert.Equal(testPlayer, savedPlayer);
         }
 
+        [Fact]
+        public void Find_FindPlayerById_ReturnsPlayer()
+        {
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+
+            Player foundPlayer = Player.Find(testPlayer.GetId());
+            Console.WriteLine(foundPlayer.GetId());
+            Assert.Equal(testPlayer.GetId(), foundPlayer.GetId());
+        }
+
         public void Dispose()
         {
             Player.DeleteAll();

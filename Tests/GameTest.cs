@@ -17,7 +17,7 @@ namespace LemonadeStand
         [Fact]
         public static void GetTemperature_ReturnsARandomValueBetween30And100_true()
         {
-            Game testGame = new Game();
+            Game testGame = new Game(1);
             int temp = testGame.GetTemperature();
 
             bool result = (temp >= 30 && temp < 100);
@@ -27,7 +27,7 @@ namespace LemonadeStand
         [Fact]
         public static void GetForecast_ReturnsRandomValueFromForecastArray_true()
         {
-            Game testGame = new Game();
+            Game testGame = new Game(1);
 
             string forecast = testGame.GetForecast();
             string[] forecastArray = Game.GetForecastArray();
@@ -40,7 +40,7 @@ namespace LemonadeStand
         [Fact]
         public static void Play_CupsSoldPositiveInteger_true()
         {
-            Game testGame = new Game();
+            Game testGame = new Game(1);
             Dictionary<string, object> testDictionary = testGame.Play(5, 10);
 
             var cupsSold = testDictionary["cupsSold"];
@@ -52,7 +52,7 @@ namespace LemonadeStand
         [Fact]
         public static void Play_MaxBoughtIsWeatherDividedByPricePerCup_true()
         {
-            Game testGame = new Game();
+            Game testGame = new Game(1);
             decimal pricePerCup = 5m;
             int numberOfPitchers = 10;
             Dictionary<string, object> testDictionary = testGame.Play(pricePerCup, numberOfPitchers);
@@ -86,7 +86,7 @@ namespace LemonadeStand
         [Fact]
         public static void Find_ReturnsGameBasedOnId()
         {
-            Game testGame = new Game();
+            Game testGame = new Game(1);
 
             Game result = Game.Find(testGame.GetId());
 
