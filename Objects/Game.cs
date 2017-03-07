@@ -29,7 +29,6 @@ namespace LemonadeStand
         {
             return _id;
         }
-
         public int GetTemperature()
         {
             return _temperature;
@@ -50,21 +49,38 @@ namespace LemonadeStand
         {
             return Forecasts;
         }
-
         public static Game Find(int searchId)
         {
             return _games[searchId];
         }
 
-        // public static string[] GetForecastArray()
-        // {
-        //   return _forecasts;
-        // }
+        public Dictionary<string, int> Play(int pricePerCup, int numberOfPitchers)
+        {
+            int totalAmountSpent = numberOfPitchers*_pitcherPrice;
 
-        // public static DeleteAll()
-        // {
-        //
-        // }
+            int totalCupsMade = numberOfPitchers*_cupsPerPitcher;
 
+            int forecastNumber = Array.IndexOf(Forecasts, _forecast);
+
+            int maxBought = (forecastNumber*_temperature)/pricePerCup;
+
+            int cupsSold = 0;
+            if(totalCupsMade <= maxBought)
+            {
+                cupsSold = totalCupsMade;
+            }
+            else
+            {
+                cupsSold = maxBought;
+            }
+
+            int totalAmountMade = cupsSold*pricePerCup;
+
+            int remainingMoney = totalAmountMade - totalAmountSpent;
+            Dictionary<string, int> play = new Dictionary<string, int> {};
+            play.Add("cupsSold", cupsSold);
+            play.Add("remainingMoney", remainingMoney);
+            return play;
+        }
     }
 }

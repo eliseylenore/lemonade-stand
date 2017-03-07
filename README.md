@@ -12,17 +12,12 @@ _Lemonade Stand is an educational game that inspires young entrepreneurs to take
 
 _Create database_
 In SQLMD:
-* _> CREATE DATABASE band_tracker;_
+* _> CREATE DATABASE lemonade_stand;_
 * _> GO_
-* _> USE band_tracker;_
+* _> USE lemonade_stand;_
 * _> GO_
-* _> CREATE TABLE bands (id INT IDENTITY(1,1), name VARCHAR(255));_
+* _> CREATE TABLE scores (id INT IDENTITY(1,1), score INT);_
 * _> GO_
-* _> CREATE TABLE venues (id INT IDENTITY(1,1), name VARCHAR(255));_
-* _> GO_
-* _> CREATE TABLE bands_venues (band_id INT, venue_id INT);_
-* _> GO_
-
 
 ## Game Object Specs
 
