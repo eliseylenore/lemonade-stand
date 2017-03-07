@@ -8,7 +8,12 @@ namespace LemonadeStand
     {
         public HomeModule()
         {
-            Get["/results"] = _ => View["Game.cshtml"];
+            Get["/game"] = _ => {
+                Game newGame = new Game();
+                return View["Game.cshtml", newGame];
+            };
+
+            Get["/results"] = _ => View["results.cshtml"];
         }
 
 
