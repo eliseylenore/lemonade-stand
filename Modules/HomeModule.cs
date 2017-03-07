@@ -14,6 +14,16 @@ namespace LemonadeStand
             };
 
             Get["/results"] = _ => View["results.cshtml"];
+
+            Post["/results"] = _ => {
+              Game newGame = new Game();
+              Dictionary<string, object> model = newGame.Play(Request.Form["cup"], Request.Form["pitcher"]);
+              return View["results.cshtml", model];
+
+            };
+
+
+
         }
 
 
