@@ -8,7 +8,7 @@ namespace LemonadeStand
     {
         private static List<Game> _games = new List<Game> {};
         private int _id;
-        private int _playerId;
+        private Player _player;
         private int _temperature;
         private decimal _pitcherPrice;
         private int _cupsPerPitcher;
@@ -19,7 +19,7 @@ namespace LemonadeStand
         public Game(int PlayerId)
         {
             _id = _games.Count;
-            _playerId = PlayerId;
+            _player = Player.Find(PlayerId);
             _games.Add(this);
             _temperature = rnd.Next(30,100);
             _forecast = Forecasts[rnd.Next(0, Forecasts.Length)];
@@ -31,9 +31,9 @@ namespace LemonadeStand
         {
             return _id;
         }
-        public int GetPlayerId()
+        public Player GetPlayer()
         {
-            return _playerId;
+            return _player;
         }
         public int GetTemperature()
         {
@@ -60,8 +60,10 @@ namespace LemonadeStand
             return _games[searchId];
         }
 
-        public Dictionary<string, object> Play(decimal pricePerCup, int numberOfPitchers)
+        public Dictionary<string, object> Play(decimal pricePerCup, int numberOfPitchers, Player gamePlayer)
         {
+            decimal startingMoney = gamePlayer.GetMoney();
+
             decimal totalAmountSpent = numberOfPitchers*_pitcherPrice;
 
             int totalCupsMade = numberOfPitchers*_cupsPerPitcher;
@@ -84,10 +86,17 @@ namespace LemonadeStand
 
             decimal totalAmountMade = cupsSold*pricePerCup;
 
-            decimal remainingMoney = totalAmountMade - totalAmountSpent;
+            decimal profit = totalAmountMade - totalAmountSpent;
+
+            decimal remainingMoney = startingMoney + profit;
+            gamePlayer.SetMoney(remainingMoney);
+            //does this save?
+
             Dictionary<string, object> play = new Dictionary<string, object> {};
             play.Add("cupsSold", cupsSold);
+            play.Add("profit", profit);
             play.Add("remainingMoney", remainingMoney);
+
             return play;
         }
 

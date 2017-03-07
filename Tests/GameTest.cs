@@ -41,7 +41,9 @@ namespace LemonadeStand
         public static void Play_CupsSoldPositiveInteger_true()
         {
             Game testGame = new Game(1);
-            Dictionary<string, object> testDictionary = testGame.Play(5, 10);
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+            Dictionary<string, object> testDictionary = testGame.Play(5, 10, testPlayer);
 
             var cupsSold = testDictionary["cupsSold"];
             bool result = ((int)cupsSold >= 0);
@@ -55,7 +57,9 @@ namespace LemonadeStand
             Game testGame = new Game(1);
             decimal pricePerCup = 5m;
             int numberOfPitchers = 10;
-            Dictionary<string, object> testDictionary = testGame.Play(pricePerCup, numberOfPitchers);
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+            Dictionary<string, object> testDictionary = testGame.Play(pricePerCup, numberOfPitchers, testPlayer);
 
             string forecast = testGame.GetForecast();
             string[] Forecasts = Game.GetForecastArray();
@@ -91,7 +95,27 @@ namespace LemonadeStand
             Game result = Game.Find(testGame.GetId());
 
             Assert.Equal(testGame, result);
+        }
 
+        [Fact]
+        public void Play_PlayerGame_RemainingMoneyLessThanStartingMoney()
+        {
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+            decimal startingMoney = testPlayer.GetMoney();
+            Console.WriteLine(startingMoney);
+
+            Game playerGame = testPlayer.AddGame();
+            Dictionary<string, object> results = playerGame.Play(20m, 8, testPlayer);
+            Console.WriteLine(results["cupsSold"]);
+            Console.WriteLine(results["profit"]);
+            Console.WriteLine(results["remainingMoney"]);
+
+            decimal endingMoney = testPlayer.GetMoney();
+            Console.WriteLine(endingMoney);
+
+            bool testBool = (startingMoney > endingMoney);
+            Assert.Equal(true, testBool);
         }
 
         public void Dispose()

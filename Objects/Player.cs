@@ -58,6 +58,20 @@ namespace LemonadeStand
         public void SetMoney(decimal money)
         {
             _money = money;
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE players SET money=@Money WHERE id = @PlayerId;", conn);
+
+            cmd.Parameters.Add(new SqlParameter("@PlayerId", this.GetId()));
+            cmd.Parameters.Add(new SqlParameter("@Money", money));
+
+            cmd.ExecuteNonQuery();
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
         }
 
         public Game AddGame()
