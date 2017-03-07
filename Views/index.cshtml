@@ -1,0 +1,24 @@
+@{
+    Layout = "Shared/_Layout.cshtml";
+}
+<h1>New User</h1>
+<form action="/new-user/game" method="post" id="new-user">
+    <input type="text" name="username" id="username">
+    <label for="username">Username</label>
+
+    <input type="text" name="password" id="password">
+    <label for="password">Password</label>
+
+    <button type="submit">Submit</button>
+</form>
+
+<h1>Returning User</h1>
+<form action="/returning-user/game" method="post" id="returning-user">
+    <input type="text" name="username" id="username">
+    <label for="username">Username</label>
+
+    <input type="text" name="password" id="password">
+    <label for="password">Password</label>
+
+    <button type="submit">Submit</button>
+</form>

@@ -103,16 +103,11 @@ namespace LemonadeStand
             Player testPlayer = new Player("coolgurl123", "password123");
             testPlayer.Save();
             decimal startingMoney = testPlayer.GetMoney();
-            Console.WriteLine(startingMoney);
 
             Game playerGame = testPlayer.AddGame();
             Dictionary<string, object> results = playerGame.Play(20m, 8, testPlayer);
-            Console.WriteLine(results["cupsSold"]);
-            Console.WriteLine(results["profit"]);
-            Console.WriteLine(results["remainingMoney"]);
 
             decimal endingMoney = testPlayer.GetMoney();
-            Console.WriteLine(endingMoney);
 
             bool testBool = (startingMoney > endingMoney);
             Assert.Equal(true, testBool);

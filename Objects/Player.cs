@@ -146,6 +146,45 @@ namespace LemonadeStand
             return foundPlayer;
         }
 
+        public static Player Search(string playerUsername, string playerPassword)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM players WHERE username = @Username AND password = @Password;", conn);
+            cmd.Parameters.Add(new SqlParameter("@Username", playerUsername));
+            cmd.Parameters.Add(new SqlParameter("@Password", playerPassword));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int id = 0;
+            string username = null;
+            string password = null;
+            decimal money = 0m;
+
+            while(rdr.Read())
+            {
+                id = rdr.GetInt32(0);
+                username = rdr.GetString(1);
+                password = rdr.GetString(2);
+                money = rdr.GetDecimal(3);
+            }
+
+            Player searchedPlayer = new Player(username, password, id);
+            searchedPlayer._money = money;
+            if(rdr != null)
+            {
+                rdr.Close();
+            }
+
+            if(conn != null)
+            {
+                conn.Close();
+            }
+
+            return searchedPlayer;
+        }
+
         public static List<Player> GetAll()
         {
             List<Player> allPlayers = new List<Player>{};

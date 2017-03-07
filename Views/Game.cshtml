@@ -1,25 +1,27 @@
 @{
     Layout = "Shared/_Layout.cshtml";
 }
-
+<div class="row">
+    <h2>@Model["player"].GetUsername()</h2>
+</div>
 <div class="row">
     <div class="col-md-6">
         <h1>Weather</h1>
-        <h2>@Model.GetTemperature() and @Model.GetForecast()</h2>
+        <h2>@Model["game"].GetTemperature() and @Model["game"].GetForecast()</h2>
     </div>
     <div class="col-md-6">
         <h1>Cost Per Pitcher</h1>
-        <h2>$@Model.GetPitcherPrice()</h2>
+        <h2>$@Model["game"].GetPitcherPrice()</h2>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
         <form action="/results" method="post">
-            <label for="cup">Cups</label>
+            <label for="cup">Price Per Cup</label>
             <input type="number" name="cup" min="1" max="3">
-            <label for="pitcher">Pitchers</label>
+            <label for="pitcher">Number of Pitchers</label>
             <input type="number" name="pitcher" min="1" max="10">
-            <input type="hidden" name="game-id" value="@Model.GetId()">
+            <input type="hidden" name="game-id" value="@Model["game"].GetId()">
             <button type="submit" name="submit">Go!</button>
         </form>
     </div>

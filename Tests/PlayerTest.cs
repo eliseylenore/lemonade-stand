@@ -48,6 +48,19 @@ namespace LemonadeStand
         }
 
         [Fact]
+        public void Search_SearchPlayerByUsernameAndPassword_SearchedPlayer()
+        {
+            Player testPlayer1 = new Player("coolgurl123", "password123");
+            testPlayer1.Save();
+            Player testPlayer2 = new Player("coolboi123", "password321");
+            testPlayer2.Save();
+
+            Player searchedPlayer = Player.Search("coolboi123", "password321");
+
+            Assert.Equal(testPlayer2, searchedPlayer);
+        }
+
+        [Fact]
         public void AddGame_Player_AddGameToPlayer()
         {
             Player testPlayer = new Player("coolgurl123", "password123");
