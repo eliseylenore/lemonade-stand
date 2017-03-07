@@ -9,7 +9,7 @@ namespace LemonadeStand
         private static List<Game> _games = new List<Game> {};
         private int _id;
         private int _temperature;
-        private int _pitcherPrice;
+        private decimal _pitcherPrice;
         private int _cupsPerPitcher;
         private string _forecast;
         public static string[] Forecasts = new string[] {"sunny", "partly cloudy", "cloudy", "rain"};
@@ -33,7 +33,7 @@ namespace LemonadeStand
         {
             return _temperature;
         }
-        public int GetPitcherPrice()
+        public decimal GetPitcherPrice()
         {
             return _pitcherPrice;
         }
@@ -54,15 +54,17 @@ namespace LemonadeStand
             return _games[searchId];
         }
 
-        public Dictionary<string, int> Play(int pricePerCup, int numberOfPitchers)
+        public Dictionary<string, object> Play(decimal pricePerCup, int numberOfPitchers)
         {
-            int totalAmountSpent = numberOfPitchers*_pitcherPrice;
+            decimal totalAmountSpent = numberOfPitchers*_pitcherPrice;
 
             int totalCupsMade = numberOfPitchers*_cupsPerPitcher;
 
             int forecastNumber = Array.IndexOf(Forecasts, _forecast);
 
-            int maxBought = (forecastNumber*_temperature)/pricePerCup;
+            int pricePerCupInt = Convert.ToInt32(pricePerCup * 100);
+
+            int maxBought = (forecastNumber*_temperature)/pricePerCupInt;
 
             int cupsSold = 0;
             if(totalCupsMade <= maxBought)
@@ -74,10 +76,10 @@ namespace LemonadeStand
                 cupsSold = maxBought;
             }
 
-            int totalAmountMade = cupsSold*pricePerCup;
+            decimal totalAmountMade = cupsSold*pricePerCup;
 
-            int remainingMoney = totalAmountMade - totalAmountSpent;
-            Dictionary<string, int> play = new Dictionary<string, int> {};
+            decimal remainingMoney = totalAmountMade - totalAmountSpent;
+            Dictionary<string, object> play = new Dictionary<string, object> {};
             play.Add("cupsSold", cupsSold);
             play.Add("remainingMoney", remainingMoney);
             return play;

@@ -41,10 +41,10 @@ namespace LemonadeStand
         public static void Play_CupsSoldPositiveInteger_true()
         {
             Game testGame = new Game();
-            Dictionary<string, int> testDictionary = testGame.Play(5, 10);
+            Dictionary<string, object> testDictionary = testGame.Play(5, 10);
 
-            int cupsSold = testDictionary["cupsSold"];
-            bool result = (cupsSold >= 0);
+            var cupsSold = testDictionary["cupsSold"];
+            bool result = ((int)cupsSold >= 0);
             Assert.Equal(true, result);
         }
 
@@ -53,16 +53,18 @@ namespace LemonadeStand
         public static void Play_MaxBoughtIsWeatherDividedByPricePerCup_true()
         {
             Game testGame = new Game();
-            int pricePerCup = 5;
+            decimal pricePerCup = 5m;
             int numberOfPitchers = 10;
-            Dictionary<string, int> testDictionary = testGame.Play(pricePerCup, numberOfPitchers);
+            Dictionary<string, object> testDictionary = testGame.Play(pricePerCup, numberOfPitchers);
 
             string forecast = testGame.GetForecast();
             string[] Forecasts = Game.GetForecastArray();
             int forecastNumber = Array.IndexOf(Forecasts, forecast);
             int temperature = testGame.GetTemperature();
 
-            int maxBought = (forecastNumber*temperature)/pricePerCup;
+            int pricePerCupInt = Convert.ToInt32(pricePerCup * 100);
+
+            int maxBought = (forecastNumber*temperature)/pricePerCupInt;
 
             int cupsPerPitcher = testGame.GetCupsPerPitcher();
             int totalCupsMade = cupsPerPitcher*numberOfPitchers;
@@ -77,7 +79,7 @@ namespace LemonadeStand
                 cupsSold = maxBought;
             }
 
-            int actual = testDictionary["cupsSold"];
+            var actual = testDictionary["cupsSold"];
             Assert.Equal(cupsSold, actual);
         }
 
