@@ -37,6 +37,42 @@ namespace LemonadeStand
             Assert.Equal(testPlayer, savedPlayer);
         }
 
+        [Fact]
+        public void Find_FindPlayerById_ReturnsPlayer()
+        {
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+
+            Player foundPlayer = Player.Find(testPlayer.GetId());
+            Assert.Equal(testPlayer.GetId(), foundPlayer.GetId());
+        }
+
+        [Fact]
+        public void AddGame_Player_AddGameToPlayer()
+        {
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+
+            Game playerGame = testPlayer.AddGame();
+
+            Player gamePlayer = playerGame.GetPlayer();
+
+            Assert.Equal(gamePlayer, testPlayer);
+        }
+
+        [Fact]
+        public void SetMoney_Player_SetsMoneyEqualToNewValue()
+        {
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+
+            testPlayer.SetMoney(19.99m);
+
+            decimal newMoney = testPlayer.GetMoney();
+
+            Assert.Equal(19.99m, newMoney);
+        }
+
         public void Dispose()
         {
             Player.DeleteAll();

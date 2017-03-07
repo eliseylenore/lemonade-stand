@@ -9,12 +9,14 @@ namespace LemonadeStand
         private int _id;
         private string _username;
         private string _password;
+        private decimal _money;
 
         public Player(string username, string password, int id = 0)
         {
             _id = id;
             _username = username;
             _password = password;
+            _money = 20m;
         }
 
         public override bool Equals(System.Object otherPlayer)
@@ -29,9 +31,11 @@ namespace LemonadeStand
                 bool idEquality = this.GetId() == newPlayer.GetId();
                 bool usernameEquality = this.GetUsername() == newPlayer.GetUsername();
                 bool passwordEquality = this.GetPassword() == newPlayer.GetPassword();
+                bool moneyEquality = this.GetMoney() == newPlayer.GetMoney();
                 return (idEquality && usernameEquality && passwordEquality);
             }
         }
+
 
         public int GetId()
         {
@@ -46,15 +50,46 @@ namespace LemonadeStand
             return _password;
         }
 
+        public decimal GetMoney()
+        {
+            return _money;
+        }
+
+        public void SetMoney(decimal money)
+        {
+            _money = money;
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE players SET money=@Money WHERE id = @PlayerId;", conn);
+
+            cmd.Parameters.Add(new SqlParameter("@PlayerId", this.GetId()));
+            cmd.Parameters.Add(new SqlParameter("@Money", money));
+
+            cmd.ExecuteNonQuery();
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
+        public Game AddGame()
+        {
+            Game newGame = new Game(this._id);
+            return newGame;
+        }
+
         public void Save()
         {
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("INSERT INTO players (username, password) OUTPUT INSERTED.id VALUES (@Username, @Password);", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO players (username, password, money) OUTPUT INSERTED.id VALUES (@Username, @Password, @Money);", conn);
 
             cmd.Parameters.Add(new SqlParameter("@Username", this.GetUsername()));
             cmd.Parameters.Add(new SqlParameter("@Password", this.GetPassword()));
+            cmd.Parameters.Add(new SqlParameter("@Money", this.GetMoney()));
 
             SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -62,7 +97,6 @@ namespace LemonadeStand
             {
                 this._id = rdr.GetInt32(0);
             }
-            Console.WriteLine(this.GetId());
 
             if (rdr != null)
             {
@@ -72,6 +106,44 @@ namespace LemonadeStand
             {
                 conn.Close();
             }
+        }
+
+        public static Player Find(int playerId)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM players WHERE id = @PlayerId;", conn);
+            cmd.Parameters.Add(new SqlParameter("@PlayerId", playerId.ToString()));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int id = 0;
+            string username = null;
+            string password = null;
+            decimal money = 0m;
+
+            while(rdr.Read())
+            {
+                id = rdr.GetInt32(0);
+                username = rdr.GetString(1);
+                password = rdr.GetString(2);
+                money = rdr.GetDecimal(3);
+            }
+
+            Player foundPlayer = new Player(username, password, id);
+            foundPlayer._money = money;
+            if(rdr != null)
+            {
+                rdr.Close();
+            }
+
+            if(conn != null)
+            {
+                conn.Close();
+            }
+
+            return foundPlayer;
         }
 
         public static List<Player> GetAll()

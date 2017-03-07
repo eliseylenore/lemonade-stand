@@ -8,16 +8,18 @@ namespace LemonadeStand
     {
         private static List<Game> _games = new List<Game> {};
         private int _id;
+        private Player _player;
         private int _temperature;
-        private int _pitcherPrice;
+        private decimal _pitcherPrice;
         private int _cupsPerPitcher;
         private string _forecast;
         public static string[] Forecasts = new string[] {"sunny", "partly cloudy", "cloudy", "rain"};
         Random rnd = new Random();
 
-        public Game()
+        public Game(int PlayerId)
         {
             _id = _games.Count;
+            _player = Player.Find(PlayerId);
             _games.Add(this);
             _temperature = rnd.Next(30,100);
             _forecast = Forecasts[rnd.Next(0, Forecasts.Length)];
@@ -29,11 +31,15 @@ namespace LemonadeStand
         {
             return _id;
         }
+        public Player GetPlayer()
+        {
+            return _player;
+        }
         public int GetTemperature()
         {
             return _temperature;
         }
-        public int GetPitcherPrice()
+        public decimal GetPitcherPrice()
         {
             return _pitcherPrice;
         }
@@ -54,15 +60,19 @@ namespace LemonadeStand
             return _games[searchId];
         }
 
-        public Dictionary<string, int> Play(int pricePerCup, int numberOfPitchers)
+        public Dictionary<string, object> Play(decimal pricePerCup, int numberOfPitchers, Player gamePlayer)
         {
-            int totalAmountSpent = numberOfPitchers*_pitcherPrice;
+            decimal startingMoney = gamePlayer.GetMoney();
+
+            decimal totalAmountSpent = numberOfPitchers*_pitcherPrice;
 
             int totalCupsMade = numberOfPitchers*_cupsPerPitcher;
 
             int forecastNumber = Array.IndexOf(Forecasts, _forecast);
 
-            int maxBought = (forecastNumber*_temperature)/pricePerCup;
+            int pricePerCupInt = Convert.ToInt32(pricePerCup * 100);
+
+            int maxBought = (forecastNumber*_temperature)/pricePerCupInt;
 
             int cupsSold = 0;
             if(totalCupsMade <= maxBought)
@@ -74,12 +84,19 @@ namespace LemonadeStand
                 cupsSold = maxBought;
             }
 
-            int totalAmountMade = cupsSold*pricePerCup;
+            decimal totalAmountMade = cupsSold*pricePerCup;
 
-            int remainingMoney = totalAmountMade - totalAmountSpent;
-            Dictionary<string, int> play = new Dictionary<string, int> {};
+            decimal profit = totalAmountMade - totalAmountSpent;
+
+            decimal remainingMoney = startingMoney + profit;
+            gamePlayer.SetMoney(remainingMoney);
+            //does this save?
+
+            Dictionary<string, object> play = new Dictionary<string, object> {};
             play.Add("cupsSold", cupsSold);
+            play.Add("profit", profit);
             play.Add("remainingMoney", remainingMoney);
+
             return play;
         }
 
