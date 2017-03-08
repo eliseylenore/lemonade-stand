@@ -35,6 +35,7 @@ namespace LemonadeStand
         {
             return _player;
         }
+
         public int GetTemperature()
         {
             return _temperature;

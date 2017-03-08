@@ -9,4 +9,7 @@
 <hr>
 <h3>Total Funds Available: @Model["remainingMoney"]</h3>
 
-<button type="button" name="button">Next</button>
+<form action="/another/game" method="post">
+    <input type="hidden" name="player-id" value="@Model["game"].GetPlayer().GetId()">
+    <button type="submit" name="button">Next Day</button>
+</form>

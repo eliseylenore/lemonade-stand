@@ -45,10 +45,22 @@ namespace LemonadeStand
               Game foundGame = Game.Find(Request.Form["game-id"]);
               Player foundGamePlayer = foundGame.GetPlayer();
               Dictionary<string, object> model = foundGame.Play(Request.Form["cup"], Request.Form["pitcher"], foundGamePlayer);
+              model.Add("game", foundGame);
               return View["results.cshtml", model];
             };
 
-
+            Post["/another/game"] = _ => {
+                Dictionary<string, object> model = new Dictionary<string, object>{};
+                Player foundPlayer = Player.Find(Request.Form["player-id"]);
+                Game playerGame = foundPlayer.AddGame();
+                decimal pricePerPitcher = playerGame.GetPitcherPrice();
+                decimal playerMoney = foundPlayer.GetMoney();
+                int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
+                model.Add("limit", limit);
+                model.Add("game", playerGame);
+                model.Add("player", foundPlayer);
+                return View["Game.cshtml", model];
+            };
 
         }
 
