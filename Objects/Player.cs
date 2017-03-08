@@ -106,11 +106,11 @@ namespace LemonadeStand
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("UPDATE players SET money=@Money And count=@Count WHERE id = @PlayerId;", conn);
+            SqlCommand cmd = new SqlCommand("UPDATE players SET money=@Money WHERE id = @PlayerId; UPDATE players SET count=@Count WHERE id = @PlayerId;", conn);
 
             cmd.Parameters.Add(new SqlParameter("@PlayerId", this.GetId()));
             cmd.Parameters.Add(new SqlParameter("@Money", 20m));
-            cmd.Parameters.Add(new SqlParameter("@Count", 0));
+            cmd.Parameters.Add(new SqlParameter("@Count", "0"));
 
             cmd.ExecuteNonQuery();
 
@@ -171,7 +171,7 @@ namespace LemonadeStand
 
             cmd.ExecuteNonQuery();
 
-            _count = 0;
+            _count = 1;
             _money = 20m;
 
             if (conn != null)

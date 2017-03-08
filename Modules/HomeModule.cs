@@ -17,7 +17,6 @@ namespace LemonadeStand
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 Player newPlayer = new Player(Request.Form["username"], Request.Form["password"]);
                 newPlayer.Save();
-                newPlayer.ResetMoneyAndCount();
                 Game playerGame = newPlayer.AddGame();
                 Console.WriteLine(playerGame.GetId());
                 decimal pricePerPitcher = playerGame.GetPitcherPrice();
@@ -26,6 +25,7 @@ namespace LemonadeStand
                 model.Add("limit", limit);
                 model.Add("game", playerGame);
                 model.Add("player", newPlayer);
+                model.Add("count", newPlayer.GetCount());
                 return View["Game.cshtml", model];
             };
             //if player is returning player
@@ -37,18 +37,18 @@ namespace LemonadeStand
                 Game playerGame = foundPlayer.AddGame();
                 decimal pricePerPitcher = playerGame.GetPitcherPrice();
                 decimal playerMoney = foundPlayer.GetMoney();
-                Console.WriteLine(playerGame.GetId());
                 int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
                 model.Add("limit", limit);
                 model.Add("game", playerGame);
                 model.Add("player", foundPlayer);
+                model.Add("count", foundPlayer.GetCount());
                 return View["Game.cshtml", model];
             };
 
             Post["/results"] = _ => {
               Game foundGame = Game.Find(Request.Form["game-id"]);
-              Console.WriteLine(foundGame.GetId());
               Player foundGamePlayer = foundGame.GetPlayer();
+              Console.WriteLine(foundGamePlayer.GetCount());
               Dictionary<string, object> model = foundGame.Play(Request.Form["cup"], Request.Form["pitcher"], foundGamePlayer);
               model.Add("game", foundGame);
               model.Add("count", foundGamePlayer.GetCount());
@@ -62,7 +62,8 @@ namespace LemonadeStand
                 if(foundPlayer.GetCount() > 7)
                 {
                   foundPlayer.SaveScore();
-                  Console.WriteLine("after saving");
+                  foundPlayer.ResetMoneyAndCount();
+                  model.Add("count", foundPlayer.GetCount());
                   Game playerGame = foundPlayer.AddGame();
                   decimal pricePerPitcher = playerGame.GetPitcherPrice();
                   decimal playerMoney = foundPlayer.GetMoney();
@@ -74,7 +75,6 @@ namespace LemonadeStand
                 }
                 else
                 {
-                  Console.WriteLine("before saving");
                   Game playerGame = foundPlayer.AddGame();
                   decimal pricePerPitcher = playerGame.GetPitcherPrice();
                   decimal playerMoney = foundPlayer.GetMoney();
@@ -82,6 +82,7 @@ namespace LemonadeStand
                   model.Add("limit", limit);
                   model.Add("game", playerGame);
                   model.Add("player", foundPlayer);
+                  model.Add("count", foundPlayer.GetCount());
                   return View["Game.cshtml", model];
                 }
             };
