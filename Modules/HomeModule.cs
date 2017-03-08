@@ -47,7 +47,6 @@ namespace LemonadeStand
             Post["/results"] = _ => {
               Game foundGame = Game.Find(Request.Form["game-id"]);
               Player foundGamePlayer = foundGame.GetPlayer();
-              Console.WriteLine("results count: "+foundGamePlayer.GetCount());
               Dictionary<string, object> model = foundGame.Play(Request.Form["cup"], Request.Form["pitcher"], foundGamePlayer);
               model.Add("game", foundGame);
               model.Add("count", foundGamePlayer.GetCount());
@@ -84,6 +83,21 @@ namespace LemonadeStand
                   model.Add("count", foundPlayer.GetCount());
                   return View["Game.cshtml", model];
                 }
+            };
+
+            Post["/start-over"] = _ => {
+                Dictionary<string, object> model = new Dictionary<string, object>{};
+                Player foundPlayer = Player.Find(Request.Form["player-id"]);
+                foundPlayer.ResetMoneyAndCount();
+                Game playerGame = foundPlayer.AddGame();
+                decimal pricePerPitcher = playerGame.GetPitcherPrice();
+                decimal playerMoney = foundPlayer.GetMoney();
+                int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
+                model.Add("limit", limit);
+                model.Add("game", playerGame);
+                model.Add("player", foundPlayer);
+                model.Add("count", foundPlayer.GetCount());
+                return View["Game.cshtml", model];
             };
 
         }

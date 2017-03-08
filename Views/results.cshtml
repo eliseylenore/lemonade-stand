@@ -12,5 +12,9 @@
       <input type="hidden" name="player-id" value="@Model["game"].GetPlayer().GetId()">
       <button type="submit" class="btn btn-info" name="button">Next</button>
   </form>
+  <form action="/start-over" method="post">
+      <input type="hidden" name="player-id" value="@Model["game"].GetPlayer().GetId()">
+      <button type="submit" class="btn btn-danger" name="button">End Game</button>
+  </form>
 
 </div>
