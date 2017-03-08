@@ -113,6 +113,27 @@ namespace LemonadeStand
             Assert.Equal(true, testBool);
         }
 
+        [Fact]
+        public void GetPlayer_PlayerMaintainsCount_CorrectCount()
+        {
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+
+            Game playerGame1 = testPlayer.AddGame();
+            playerGame1.Play(0.6m, 5, testPlayer);
+            Game playerGame2 = testPlayer.AddGame();
+            playerGame2.Play(0.6m, 5, testPlayer);
+            Game playerGame3 = testPlayer.AddGame();
+            playerGame3.Play(0.6m, 5, testPlayer);
+
+            int expected = testPlayer.GetCount();
+
+            Player foundPlayer = playerGame3.GetPlayer();
+            int actual = foundPlayer.GetCount();
+
+            Assert.Equal(expected, actual);
+        }
+
         public void Dispose()
         {
 
