@@ -1,12 +1,6 @@
 /************General Styles************/
-
 body {
-	background: url("../img/background.jpg") no-repeat center center fixed; ;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	color: #01A9B1;
-	font-family: 'Fredoka One', cursive;
+	color: #5bc0de;
 }
 
 form {
@@ -32,6 +26,9 @@ form {
 	justify-content: flex-start;
 }
 
+.small-spacing {
+	height: 50px;
+}
 .spacing {
 	height: 150px;
 }
@@ -44,6 +41,34 @@ form {
 
 form {
 	margin: 0 auto;
+}
+
+.wallpaper, .beach-background {
+	height: 100vh;
+}
+
+.orange {
+	color: #EE7600;
+}
+
+
+/************Sign In Page************/
+.wallpaper {
+	background: url("../img/background.jpg") no-repeat center center fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: #01A9B1;
+	font-family: 'Fredoka One', cursive;
+}
+
+/************Game Page************/
+.beach-background {
+	background: url("../img/beach.jpg") no-repeat center center fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-family: 'Fredoka One', cursive;
 }
 
 /************Submit Button************/
