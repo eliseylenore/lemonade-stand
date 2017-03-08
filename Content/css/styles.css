@@ -75,6 +75,11 @@ form {
 	font-family: 'Fredoka One', cursive;
 }
 
+.weather {
+	background: url("../img/rain.png") no-repeat center center fixed;
+	background-size: contain;
+}
+
 /************Submit Button************/
 .lemonsubmit
 {
