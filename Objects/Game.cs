@@ -13,7 +13,7 @@ namespace LemonadeStand
         private decimal _pitcherPrice;
         private int _cupsPerPitcher;
         private string _forecast;
-        public static string[] Forecasts = new string[] {"sunny", "partly cloudy", "cloudy", "rain"};
+        public static string[] Forecasts = new string[] {"rain", "cloudy", "partly cloudy", "sunny"};
         Random rnd = new Random();
 
         public Game(int PlayerId)
@@ -72,7 +72,7 @@ namespace LemonadeStand
 
             int pricePerCupInt = Convert.ToInt32(pricePerCup * 100);
 
-            int maxBought = (forecastNumber*_temperature)/pricePerCupInt;
+            int maxBought = (forecastNumber*(_temperature + 5))/(pricePerCupInt);
 
             int cupsSold = 0;
             if(totalCupsMade <= maxBought)

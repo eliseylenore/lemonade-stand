@@ -24,14 +24,24 @@
 $(document).ready(function() {
     var pitchers;
     var costPerPitcher;
-    var playerMoney = parseInt($("#player-money").text());
+    var playerMoney = parseFloat($("#player-money").text()).toFixed(2);
+    var newMoney = parseFloat($("#player-money").text()).toFixed(2);
     $('input.pitcher').click(function() {
-        pitchers = parseInt($('input.pitcher').val());
-        costPerPitcher = parseInt($("#pitcher-price").text());
+        pitchers = parseFloat($('input.pitcher').val()).toFixed(2);
+        // change costPerPitcher into a decimal instead of int
+        costPerPitcher = parseFloat($("#pitcher-price").text()).toFixed(2);
         if(pitchers > 0)
         {
-            var newMoney = playerMoney - (costPerPitcher * pitchers);
-            $("#player-money").text(newMoney);
+            newMoney = playerMoney - (costPerPitcher * pitchers);
+
+            // if(newMoney > 0){
+                $("#player-money").text(newMoney.toFixed(2));
+            // }
+            // else
+            // {
+            //
+            // }
+
             console.log(costPerPitcher);
             console.log(pitchers);
         }

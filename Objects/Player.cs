@@ -108,6 +108,54 @@ namespace LemonadeStand
             }
         }
 
+        public void SaveScore()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("INSERT INTO players_scores (player_id, score) VALUES (@PlayerId, @Score);", conn);
+
+            cmd.Parameters.Add(new SqlParameter("@Score", this._money));
+            cmd.Parameters.Add(new SqlParameter("@PlayerId", this.GetId()));
+
+            cmd.ExecuteNonQuery();
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
+        public List<decimal> GetScores()
+        {
+            List<decimal> AllScores= new List<decimal> {};
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT score FROM players_scores WHERE player_id = @PlayerId;", conn);
+            cmd.Parameters.Add(new SqlParameter("@PlayerId", this._id));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                decimal score = rdr.GetDecimal(0);
+                AllScores.Add(score);
+            }
+
+            if(rdr != null)
+            {
+                rdr.Close();
+            }
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+
+            return AllScores;
+        }
+
         public static Player Find(int playerId)
         {
             SqlConnection conn = DB.Connection();

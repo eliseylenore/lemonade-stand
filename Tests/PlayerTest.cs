@@ -86,6 +86,22 @@ namespace LemonadeStand
             Assert.Equal(19.99m, newMoney);
         }
 
+        [Fact]
+        public void SaveScore_SavesScoreInDatabase()
+        {
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+
+            Game playerGame = testPlayer.AddGame();
+            playerGame.Play(0.6m, 5, testPlayer);
+            testPlayer.SaveScore();
+
+            List<decimal> ExpectedScores = new List<decimal>{testPlayer.GetMoney()};
+            List<decimal> ActualScores = testPlayer.GetScores();
+
+            Assert.Equal(ExpectedScores, ActualScores);
+        }
+
         public void Dispose()
         {
             Player.DeleteAll();
