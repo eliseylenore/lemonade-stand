@@ -1,25 +1,48 @@
 @{
     Layout = "Shared/_Layout.cshtml";
 }
+<div class="wallpaper">
+    <div class="container">
+        <div class="row spacing">
+        </div>
 
-<h1>New User</h1>
-<form action="/new-user/game" method="post" id="new-user">
-    <input type="text" name="username" id="username">
-    <label for="username">Username</label>
+        <div class="backdrop">
+            <div class="row">
+                <h1 class="fancy">Lemonade Stand </h1>
+            </div>
 
-    <input type="text" name="password" id="password">
-    <label for="password">Password</label>
-
-    <button type="submit">Submit</button>
-</form>
-
-<h1>Returning User</h1>
-<form action="/returning-user/game" method="post" id="returning-user">
-    <input type="text" name="username" id="username">
-    <label for="username">Username</label>
-
-    <input type="text" name="password" id="password">
-    <label for="password">Password</label>
-
-    <button type="submit">Submit</button>
-</form>
+            <div class="row sign-in">
+                <div class="col-md-4">
+                    <h1 class="form-title">New User</h1>
+                </div>
+                <div class="col-md-8">
+                    <form class="form-inline" action="/new-user/game" method="post" id="new-user">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="username" id="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="password" id="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-info">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row sign-in">
+                <div class="col-md-4">
+                    <h1 class="form-title">Returning User</h1>
+                </div>
+                <div class="col-md-8">
+                    <form class="form-inline" action="/returning-user/game" method="post" id="returning-user">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="username" id="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="password" id="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-info">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,33 +1,45 @@
 @{
     Layout = "Shared/_Layout.cshtml";
 }
-<div class="row">
-    <h2>@Model["player"].GetUsername()</h2>
-</div>
-<h3>Day @Model["count"].</h3>
-<div class="row">
-    <div class="col-md-6">
-        <h1>Weather</h1>
-        <h2>@Model["game"].GetTemperature() and @Model["game"].GetForecast()</h2>
-    </div>
-    <div class="col-md-6">
-        <h1>Cost Per Pitcher</h1>
-        <h2>$<span id="pitcher-price">@Model["game"].GetPitcherPrice()</span></h2>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <h3>You currently have: $<span id="player-money">@Model["player"].GetMoney()</span></h3>
-        <form action="/results" method="post">
-            <label for="cup">Price Per Cup</label>
-            <input type="number" name="cup" step="0.10" max="3">
-            <br>
-            <label for="pitcher">Number of Pitchers</label>
-            <input type="number" class="pitcher" name="pitcher" min="1" max="@Model["limit"]">
 
-            <input type="hidden" name="game-id" value="@Model["game"].GetId()">
-            <br>
-            <button type="submit" name="submit"><img src="https://files.slack.com/files-pri/T3KRW5WC9-F4ESPBC6P/button_shape.png" class="lemonsubmit"></button>
-        </form>
+<div class="beach-background">
+    <div class="container">
+        <div class="row small-spacing">
+        </div>
+        <div class="row backdrop">
+            <div class="col-md-1">
+            </div>
+            <div class="row">
+                <h2>@Model["player"].GetUsername()</h2>
+            </div>
+            <div class="orange center">
+                <div class="row weather">
+                    <div class="">
+                        <h1 class="fancy">Weather</h1>
+                        <h2>@Model["game"].GetTemperature()&degF and @Model["game"].GetForecast()</h2>
+                    </div>
+                </div>
+                <div class="row center">
+                    <h1>Cost Per Pitcher: $<span id="pitcher-price">@Model["game"].GetPitcherPrice()</span></h1>
+
+                </div>
+
+                <div class="row">
+                    <h3>You currently have: $<span id="player-money">@Model["player"].GetMoney()</span></h3>
+                    <form class="inline-form" action="/results" method="post">
+                        <div class="form-group">
+                            <label for="cup">Price Per Cup</label>
+                            <input class="form-control" type="number" name="cup" step="0.10" max="3">
+                        </div>
+                        <div class="form-group">
+                            <label for="pitcher">Number of Pitchers</label>
+                            <input class="form-control" type="number" class="pitcher" name="pitcher" min="1" max="@Model["limit"]">
+                        </div>
+                        <input type="hidden" name="game-id" value="@Model["game"].GetId()">
+                        <button class="btn btn-info" type="submit" name="submit">Play!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
