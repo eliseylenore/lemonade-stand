@@ -1,3 +1,17 @@
+/*Submit Button*/
+.lemonsubmit 
+{
+	background-image: 	url(https://files.slack.com/files-pri/T3KRW5WC9-F4ESPBC6P/button_shape.png);
+	background-repeat: no-repeat;
+	background-color:	transparent;
+	height:			80px;
+	width:			100px;
+	border:			none;
+	text-indent:		-999em;
+}
+
+
+
 /*CSS For View Transition*/
 .pt-perspective {
 	position: relative;

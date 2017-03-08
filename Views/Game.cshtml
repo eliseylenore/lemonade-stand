@@ -20,11 +20,13 @@
         <form action="/results" method="post">
             <label for="cup">Price Per Cup</label>
             <input type="number" name="cup" step="0.10" max="3">
+            <br>
             <label for="pitcher">Number of Pitchers</label>
             <input type="number" class="pitcher" name="pitcher" min="1" max="@Model["limit"]">
 
             <input type="hidden" name="game-id" value="@Model["game"].GetId()">
-            <button type="submit" name="submit">Go!</button>
+            <br>
+            <button type="submit" name="submit"><img src="https://files.slack.com/files-pri/T3KRW5WC9-F4ESPBC6P/button_shape.png" class="lemonsubmit"></button>
         </form>
     </div>
 </div>
