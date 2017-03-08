@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Nancy;
 using Nancy.ViewEngines.Razor;
+using System;
 
 namespace LemonadeStand
 {
@@ -17,6 +18,10 @@ namespace LemonadeStand
                 Player newPlayer = new Player(Request.Form["username"], Request.Form["password"]);
                 newPlayer.Save();
                 Game playerGame = newPlayer.AddGame();
+                decimal pricePerPitcher = playerGame.GetPitcherPrice();
+                decimal playerMoney = newPlayer.GetMoney();
+                int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
+                model.Add("limit", limit);
                 model.Add("game", playerGame);
                 model.Add("player", newPlayer);
                 return View["Game.cshtml", model];
@@ -27,6 +32,10 @@ namespace LemonadeStand
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 Player foundPlayer = Player.Search(Request.Form["username"], Request.Form["password"]);
                 Game playerGame = foundPlayer.AddGame();
+                decimal pricePerPitcher = playerGame.GetPitcherPrice();
+                decimal playerMoney = foundPlayer.GetMoney();
+                int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
+                model.Add("limit", limit);
                 model.Add("game", playerGame);
                 model.Add("player", foundPlayer);
                 return View["Game.cshtml", model];
