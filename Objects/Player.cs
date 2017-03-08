@@ -10,6 +10,7 @@ namespace LemonadeStand
         private string _username;
         private string _password;
         private decimal _money;
+        private int _count;
 
         public Player(string username, string password, int id = 0)
         {
@@ -17,6 +18,7 @@ namespace LemonadeStand
             _username = username;
             _password = password;
             _money = 20m;
+            _count = 0;
         }
 
         public override bool Equals(System.Object otherPlayer)
@@ -55,6 +57,11 @@ namespace LemonadeStand
             return _money;
         }
 
+        public int GetCount()
+        {
+          return _count;
+        }
+
         public void SetMoney(decimal money)
         {
             _money = money;
@@ -77,6 +84,7 @@ namespace LemonadeStand
         public Game AddGame()
         {
             Game newGame = new Game(this._id);
+            _count +=1; 
             return newGame;
         }
 
@@ -119,6 +127,8 @@ namespace LemonadeStand
             cmd.Parameters.Add(new SqlParameter("@PlayerId", this.GetId()));
 
             cmd.ExecuteNonQuery();
+
+            _count = 0;
 
             if (conn != null)
             {
@@ -272,6 +282,8 @@ namespace LemonadeStand
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+
+
 
     }
 }

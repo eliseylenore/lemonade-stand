@@ -102,6 +102,38 @@ namespace LemonadeStand
             Assert.Equal(ExpectedScores, ActualScores);
         }
 
+        [Fact]
+        public void AddGame_WhenPlayerPlaysThreeTimes_ReturnCount3()
+        {
+          Player testPlayer = new Player("coolgurl123", "password123");
+          testPlayer.Save();
+
+          Game playerGame1 = testPlayer.AddGame();
+          Game playerGame2 = testPlayer.AddGame();
+          Game playerGame3 = testPlayer.AddGame();
+
+          Assert.Equal(3, testPlayer.GetCount());
+
+        }
+
+        [Fact]
+        public void AddGame_WhenPlayerPlaysSevenTimes_ReturnZero()
+        {
+          Player testPlayer = new Player("coolgurl123", "password123");
+          testPlayer.Save();
+
+          while(testPlayer.GetCount() < 8)
+          {
+            Game playerGame = testPlayer.AddGame();
+          }
+
+          testPlayer.SaveScore(); 
+
+          Assert.Equal(0, testPlayer.GetCount());
+
+        }
+
+
         public void Dispose()
         {
             Player.DeleteAll();
