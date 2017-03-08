@@ -77,8 +77,7 @@ form {
 
 .weather {
 	background: url("../img/rain.png") no-repeat center center;
-	background-size: 50%;
-	display: none;
+	background-size: 55%;
 }
 
 /************Submit Button************/
