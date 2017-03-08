@@ -9,7 +9,7 @@
         <div class="row backdrop">
             <div class="col-md-1">
             </div>
-            <div class="row">
+            <div class="row orange">
                 <h2>@Model["player"].GetUsername()</h2>
             </div>
             <div class="orange center weather">
@@ -26,14 +26,14 @@
 
                 <div class="row">
                     <h3>You currently have: $<span id="player-money">@Model["player"].GetMoney()</span></h3>
-                    <form class="inline-form" action="/results" method="post">
+                    <form class="form-inline" action="/results" method="post">
                         <div class="form-group">
                             <label for="cup">Price Per Cup</label>
                             <input class="form-control" type="number" name="cup" step="0.10" max="3">
                         </div>
                         <div class="form-group">
                             <label for="pitcher">Number of Pitchers</label>
-                            <input class="form-control" type="number" class="pitcher" name="pitcher" min="1" max="@Model["limit"]">
+                            <input class="form-control" type="number" id="pitcher" name="pitcher" min="1" max="@Model["limit"]">
                         </div>
                         <input type="hidden" name="game-id" value="@Model["game"].GetId()">
                         <button class="btn btn-info" type="submit" name="submit">Play!</button>
