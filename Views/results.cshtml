@@ -1,12 +1,11 @@
 @{
     Layout = "Shared/_Layout.cshtml";
 }
-<h1>Results</h1>
-<h2>Good job, you made it through another day! Here's how you did:</h2>
-<h3>Cups Sold: @Model["cupsSold"]</h3>
-<hr>
-<h3>Money Made: @Model["profit"]</h3>
-<hr>
-<h3>Total Funds Available: @Model["remainingMoney"]</h3>
-
-<button type="button" name="button">Next</button>
+<div class="container">
+  <h1 class="fancy">Results</h1>
+  <h2>Good job, you made it through another day! Here's how you did:</h2>
+  <h3>Cups Sold: @Model["cupsSold"]</h3>
+  <h3>Money Made: @Model["profit"]</h3>
+  <h3>Total Funds Available: @Model["remainingMoney"]</h3>
+  <button type="button" class="btn btn-info" name="button">Next</button>
+</div>
