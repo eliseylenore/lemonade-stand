@@ -5,22 +5,22 @@
     <div class="container">
         <div class="row small-spacing">
         </div>
-        <div class="row">
+        <div class="row backdrop">
             <div class="col-md-1">
             </div>
             <div class="row">
                 <h2>@Model["player"].GetUsername()</h2>
             </div>
-            <div class="orange">
+            <div class="orange center">
                 <div class="row">
                     <div class="">
                         <h1 class="fancy">Weather</h1>
                         <h2>@Model["game"].GetTemperature() and @Model["game"].GetForecast()</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <h1>Cost Per Pitcher</h1>
-                    <h2>$<span id="pitcher-price">@Model["game"].GetPitcherPrice()</span></h2>
+                <div class="row center">
+                    <h1>Cost Per Pitcher: $<span id="pitcher-price">@Model["game"].GetPitcherPrice()</span></h1>
+
                 </div>
 
                 <div class="row">
@@ -39,7 +39,6 @@
                     </form>
                 </div>
             </div>
-            <p>@Model["player"].GetMoney()/@Model["game"].GetPitcherPrice()</p>
         </div>
     </div>
 </div>
