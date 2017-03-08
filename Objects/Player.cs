@@ -8,14 +8,12 @@ namespace LemonadeStand
     {
         private int _id;
         private string _username;
-        private string _password;
         private decimal _money;
 
-        public Player(string username, string password, int id = 0)
+        public Player(string username, int id = 0)
         {
             _id = id;
             _username = username;
-            _password = password;
             _money = 20m;
         }
 
@@ -30,9 +28,8 @@ namespace LemonadeStand
                 Player newPlayer = (Player) otherPlayer;
                 bool idEquality = this.GetId() == newPlayer.GetId();
                 bool usernameEquality = this.GetUsername() == newPlayer.GetUsername();
-                bool passwordEquality = this.GetPassword() == newPlayer.GetPassword();
                 bool moneyEquality = this.GetMoney() == newPlayer.GetMoney();
-                return (idEquality && usernameEquality && passwordEquality);
+                return (idEquality && usernameEquality);
             }
         }
 
@@ -45,11 +42,6 @@ namespace LemonadeStand
         {
             return _username;
         }
-        public string GetPassword()
-        {
-            return _password;
-        }
-
         public decimal GetMoney()
         {
             return _money;
@@ -85,10 +77,21 @@ namespace LemonadeStand
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("INSERT INTO players (username, password, money) OUTPUT INSERTED.id VALUES (@Username, @Password, @Money);", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO players (username, money) OUTPUT INSERTED.id VALUES (@Username, @Money);", conn);
 
             cmd.Parameters.Add(new SqlParameter("@Username", this.GetUsername()));
-            cmd.Parameters.Add(new SqlParameter("@Password", this.GetPassword()));
+
+
+
+
+
+
+
+
+
+
+            //TODO: change value of @Password to hashed code
+
             cmd.Parameters.Add(new SqlParameter("@Money", this.GetMoney()));
 
             SqlDataReader rdr = cmd.ExecuteReader();
@@ -168,18 +171,16 @@ namespace LemonadeStand
 
             int id = 0;
             string username = null;
-            string password = null;
             decimal money = 0m;
 
             while(rdr.Read())
             {
                 id = rdr.GetInt32(0);
                 username = rdr.GetString(1);
-                password = rdr.GetString(2);
                 money = rdr.GetDecimal(3);
             }
 
-            Player foundPlayer = new Player(username, password, id);
+            Player foundPlayer = new Player(username, id);
             foundPlayer._money = money;
             if(rdr != null)
             {
@@ -194,31 +195,35 @@ namespace LemonadeStand
             return foundPlayer;
         }
 
-        public static Player Search(string playerUsername, string playerPassword)
+        public static Player Search(string playerUsername)
         {
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM players WHERE username = @Username AND password = @Password;", conn);
+
+
+
+
+
+
+            //Reset @Password to be equal to hashed password
+            SqlCommand cmd = new SqlCommand("SELECT * FROM players WHERE username = @Username;", conn);
             cmd.Parameters.Add(new SqlParameter("@Username", playerUsername));
-            cmd.Parameters.Add(new SqlParameter("@Password", playerPassword));
 
             SqlDataReader rdr = cmd.ExecuteReader();
 
             int id = 0;
             string username = null;
-            string password = null;
             decimal money = 0m;
 
             while(rdr.Read())
             {
                 id = rdr.GetInt32(0);
                 username = rdr.GetString(1);
-                password = rdr.GetString(2);
                 money = rdr.GetDecimal(3);
             }
 
-            Player searchedPlayer = new Player(username, password, id);
+            Player searchedPlayer = new Player(username, id);
             searchedPlayer._money = money;
             if(rdr != null)
             {
@@ -247,8 +252,7 @@ namespace LemonadeStand
             {
                 int playerId = rdr.GetInt32(0);
                 string username = rdr.GetString(1);
-                string password = rdr.GetString(2);
-                Player newPlayer = new Player(username, password, playerId);
+                Player newPlayer = new Player(username, playerId);
                 allPlayers.Add(newPlayer);
             }
 

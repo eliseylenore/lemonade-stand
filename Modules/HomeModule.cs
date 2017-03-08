@@ -30,7 +30,7 @@ namespace LemonadeStand
             Post["/returning-user/game"] = _ => {
                 //TODO: fix this code so that page only displays and game is only created if foundPlayer exists; maybe catch certain cases
                 Dictionary<string, object> model = new Dictionary<string, object>{};
-                Player foundPlayer = Player.Search(Request.Form["username"], Request.Form["password"]);
+                Player foundPlayer = Player.Search(Request.Form["username"]);
                 Game playerGame = foundPlayer.AddGame();
                 decimal pricePerPitcher = playerGame.GetPitcherPrice();
                 decimal playerMoney = foundPlayer.GetMoney();

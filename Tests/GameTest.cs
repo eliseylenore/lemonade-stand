@@ -15,7 +15,7 @@ namespace LemonadeStand
         }
 
         [Fact]
-        public static void GetTemperature_ReturnsARandomValueBetween30And100_true()
+        public void GetTemperature_ReturnsARandomValueBetween30And100_true()
         {
             Game testGame = new Game(1);
             int temp = testGame.GetTemperature();
@@ -25,7 +25,7 @@ namespace LemonadeStand
         }
 
         [Fact]
-        public static void GetForecast_ReturnsRandomValueFromForecastArray_true()
+        public void GetForecast_ReturnsRandomValueFromForecastArray_true()
         {
             Game testGame = new Game(1);
 
@@ -38,10 +38,10 @@ namespace LemonadeStand
         }
 
         [Fact]
-        public static void Play_CupsSoldPositiveInteger_true()
+        public void Play_CupsSoldPositiveInteger_true()
         {
             Game testGame = new Game(1);
-            Player testPlayer = new Player("coolgurl123", "password123");
+            Player testPlayer = new Player("coolgurl123");
             testPlayer.Save();
             Dictionary<string, object> testDictionary = testGame.Play(5, 10, testPlayer);
 
@@ -52,12 +52,12 @@ namespace LemonadeStand
 
         //TODO: write tests to test distribution of cupsSold and remainingMoney
         [Fact]
-        public static void Play_MaxBoughtIsWeatherDividedByPricePerCup_true()
+        public void Play_MaxBoughtIsWeatherDividedByPricePerCup_true()
         {
             Game testGame = new Game(1);
             decimal pricePerCup = 5m;
             int numberOfPitchers = 10;
-            Player testPlayer = new Player("coolgurl123", "password123");
+            Player testPlayer = new Player("coolgurl123");
             testPlayer.Save();
             Dictionary<string, object> testDictionary = testGame.Play(pricePerCup, numberOfPitchers, testPlayer);
 
@@ -88,7 +88,7 @@ namespace LemonadeStand
         }
 
         [Fact]
-        public static void Find_ReturnsGameBasedOnId()
+        public void Find_ReturnsGameBasedOnId()
         {
             Game testGame = new Game(1);
 
@@ -100,7 +100,7 @@ namespace LemonadeStand
         [Fact]
         public void Play_PlayerGame_RemainingMoneyLessThanStartingMoney()
         {
-            Player testPlayer = new Player("coolgurl123", "password123");
+            Player testPlayer = new Player("coolgurl123");
             testPlayer.Save();
             decimal startingMoney = testPlayer.GetMoney();
 
@@ -115,7 +115,7 @@ namespace LemonadeStand
 
         public void Dispose()
         {
-
+            Player.DeleteAll();
         }
     }
 }

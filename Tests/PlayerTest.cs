@@ -26,7 +26,7 @@ namespace LemonadeStand
         [Fact]
         public void Save_PlayerIntToDatabase_AssignsIdToPlayerReturned()
         {
-            Player testPlayer = new Player("coolgurl123", "password123");
+            Player testPlayer = new Player("coolgurl123");
             testPlayer.Save();
 
             Player savedPlayer = Player.GetAll()[0];
@@ -40,7 +40,7 @@ namespace LemonadeStand
         [Fact]
         public void Find_FindPlayerById_ReturnsPlayer()
         {
-            Player testPlayer = new Player("coolgurl123", "password123");
+            Player testPlayer = new Player("coolgurl123");
             testPlayer.Save();
 
             Player foundPlayer = Player.Find(testPlayer.GetId());
@@ -50,12 +50,12 @@ namespace LemonadeStand
         [Fact]
         public void Search_SearchPlayerByUsernameAndPassword_SearchedPlayer()
         {
-            Player testPlayer1 = new Player("coolgurl123", "password123");
+            Player testPlayer1 = new Player("coolgurl123");
             testPlayer1.Save();
-            Player testPlayer2 = new Player("coolboi123", "password321");
+            Player testPlayer2 = new Player("coolboi123");
             testPlayer2.Save();
 
-            Player searchedPlayer = Player.Search("coolboi123", "password321");
+            Player searchedPlayer = Player.Search("coolboi123");
 
             Assert.Equal(testPlayer2, searchedPlayer);
         }
@@ -63,7 +63,7 @@ namespace LemonadeStand
         [Fact]
         public void AddGame_Player_AddGameToPlayer()
         {
-            Player testPlayer = new Player("coolgurl123", "password123");
+            Player testPlayer = new Player("coolgurl123");
             testPlayer.Save();
 
             Game playerGame = testPlayer.AddGame();
@@ -76,7 +76,7 @@ namespace LemonadeStand
         [Fact]
         public void SetMoney_Player_SetsMoneyEqualToNewValue()
         {
-            Player testPlayer = new Player("coolgurl123", "password123");
+            Player testPlayer = new Player("coolgurl123");
             testPlayer.Save();
 
             testPlayer.SetMoney(19.99m);
@@ -89,7 +89,7 @@ namespace LemonadeStand
         [Fact]
         public void SaveScore_SavesScoreInDatabase()
         {
-            Player testPlayer = new Player("coolgurl123", "password123");
+            Player testPlayer = new Player("coolgurl123");
             testPlayer.Save();
 
             Game playerGame = testPlayer.AddGame();
