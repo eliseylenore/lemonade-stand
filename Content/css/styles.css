@@ -1,5 +1,53 @@
-/*Submit Button*/
-.lemonsubmit 
+/************General Styles************/
+
+body {
+	background: url("../img/background.jpg") no-repeat center center fixed; ;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: #01A9B1;
+	font-family: 'Fredoka One', cursive;
+}
+
+form {
+	display: inline-block;
+}
+
+.form-title {
+	display: inline-block;
+	text-align: right;
+}
+.fancy {
+	font-family: 'Leckerli One', cursive;
+	font-size: 72px;
+	text-align: center;
+	color: #ff0080;
+}
+
+.sign-in {
+	display: flex;
+	align-items: center;
+	vertical-align: middle;
+	flex-flow: wrap;
+	justify-content: flex-start;
+}
+
+.spacing {
+	height: 150px;
+}
+
+.backdrop {
+	background-color: rgba(255, 255, 255, 0.7);
+	padding: 40px;
+	border-radius: 50px;
+}
+
+form {
+	margin: 0 auto;
+}
+
+/************Submit Button************/
+.lemonsubmit
 {
 	background-image: 	url(https://files.slack.com/files-pri/T3KRW5WC9-F4ESPBC6P/button_shape.png);
 	background-repeat: no-repeat;
