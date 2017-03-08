@@ -60,6 +60,18 @@ namespace LemonadeStand
         {
             return _games[searchId];
         }
+        // public int GetGameCount(Player selectedPlayer)
+        // {
+        //     count = 0;
+        //     foreach(Game game in _games)
+        //     {
+        //         if(game.GetPlayer == selectedPlayer)
+        //         {
+        //             count++;
+        //         }
+        //     }
+        //     return count;
+        // }
 
         public Dictionary<string, object> Play(decimal pricePerCup, int numberOfPitchers, Player gamePlayer)
         {

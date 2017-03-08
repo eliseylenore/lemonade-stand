@@ -48,6 +48,23 @@ namespace LemonadeStand
         }
 
         [Fact]
+        public void Find_FindPlayerByIdReturnsCount_ReturnsCorrectCount()
+        {
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+
+            Game playerGame1 = testPlayer.AddGame();
+            playerGame1.Play(0.6m, 5, testPlayer);
+            Game playerGame2 = testPlayer.AddGame();
+            playerGame2.Play(0.6m, 5, testPlayer);
+            Game playerGame3 = testPlayer.AddGame();
+            playerGame3.Play(0.6m, 5, testPlayer);
+
+            Player foundPlayer = Player.Find(testPlayer.GetId());
+            Assert.Equal(testPlayer.GetCount(), foundPlayer.GetCount());
+        }
+
+        [Fact]
         public void Search_SearchPlayerByUsernameAndPassword_SearchedPlayer()
         {
             Player testPlayer1 = new Player("coolgurl123", "password123");
@@ -94,9 +111,11 @@ namespace LemonadeStand
 
             Game playerGame = testPlayer.AddGame();
             playerGame.Play(0.6m, 5, testPlayer);
+            //ExpectedScores needs to be declared and captured before SaveScore method because SaveScore method resets player's money to 20m
+            List<decimal> ExpectedScores = new List<decimal>{testPlayer.GetMoney()};
+
             testPlayer.SaveScore();
 
-            List<decimal> ExpectedScores = new List<decimal>{testPlayer.GetMoney()};
             List<decimal> ActualScores = testPlayer.GetScores();
 
             Assert.Equal(ExpectedScores, ActualScores);
@@ -105,32 +124,47 @@ namespace LemonadeStand
         [Fact]
         public void AddGame_WhenPlayerPlaysThreeTimes_ReturnCount3()
         {
-          Player testPlayer = new Player("coolgurl123", "password123");
-          testPlayer.Save();
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
 
-          Game playerGame1 = testPlayer.AddGame();
-          Game playerGame2 = testPlayer.AddGame();
-          Game playerGame3 = testPlayer.AddGame();
+            Game playerGame1 = testPlayer.AddGame();
+            playerGame1.Play(0.6m, 5, testPlayer);
+            Game playerGame2 = testPlayer.AddGame();
+            playerGame2.Play(0.6m, 5, testPlayer);
+            Game playerGame3 = testPlayer.AddGame();
+            playerGame3.Play(0.6m, 5, testPlayer);
 
-          Assert.Equal(3, testPlayer.GetCount());
-
+            Assert.Equal(3, testPlayer.GetCount());
         }
 
         [Fact]
-        public void AddGame_WhenPlayerPlaysSevenTimes_ReturnZero()
+        public void SaveScore_WhenPlayerPlaysEightTimes_ReturnZero()
         {
-          Player testPlayer = new Player("coolgurl123", "password123");
-          testPlayer.Save();
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
 
-          while(testPlayer.GetCount() < 8)
-          {
-            Game playerGame = testPlayer.AddGame();
-          }
+            while(testPlayer.GetCount() < 8)
+            {
+                Game playerGame = testPlayer.AddGame();
+            }
+            testPlayer.SaveScore();
 
-          testPlayer.SaveScore(); 
+            Assert.Equal(0, testPlayer.GetCount());
+        }
 
-          Assert.Equal(0, testPlayer.GetCount());
+        [Fact]
+        public void SaveScore_PlayerMoneyResetTo20_20()
+        {
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
 
+            while(testPlayer.GetCount() < 8)
+            {
+                Game playerGame = testPlayer.AddGame();
+            }
+            testPlayer.SaveScore();
+
+            Assert.Equal(20m, testPlayer.GetMoney());
         }
 
 

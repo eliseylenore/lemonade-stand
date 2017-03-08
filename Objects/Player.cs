@@ -34,7 +34,8 @@ namespace LemonadeStand
                 bool usernameEquality = this.GetUsername() == newPlayer.GetUsername();
                 bool passwordEquality = this.GetPassword() == newPlayer.GetPassword();
                 bool moneyEquality = this.GetMoney() == newPlayer.GetMoney();
-                return (idEquality && usernameEquality && passwordEquality);
+                bool countEquality = this.GetMoney() == newPlayer.GetMoney();
+                return (idEquality && usernameEquality && passwordEquality && countEquality);
             }
         }
 
@@ -62,9 +63,23 @@ namespace LemonadeStand
           return _count;
         }
 
-        public void SetCount()
+        public void AddCount()
         {
-          _count = 0;
+          _count = _count + 1;
+          SqlConnection conn = DB.Connection();
+          conn.Open();
+
+          SqlCommand cmd = new SqlCommand("UPDATE players SET count=@Count WHERE id = @PlayerId;", conn);
+
+          cmd.Parameters.Add(new SqlParameter("@PlayerId", this.GetId()));
+          cmd.Parameters.Add(new SqlParameter("@Count", _count));
+
+          cmd.ExecuteNonQuery();
+
+          if (conn != null)
+          {
+              conn.Close();
+          }
         }
 
         public void SetMoney(decimal money)
@@ -86,10 +101,32 @@ namespace LemonadeStand
             }
         }
 
+        public void ResetMoneyAndCount()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE players SET money=@Money And count=@Count WHERE id = @PlayerId;", conn);
+
+            cmd.Parameters.Add(new SqlParameter("@PlayerId", this.GetId()));
+            cmd.Parameters.Add(new SqlParameter("@Money", 20m));
+            cmd.Parameters.Add(new SqlParameter("@Count", 0));
+
+            cmd.ExecuteNonQuery();
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            _money = 20m;
+            _count = 0;
+
+        }
+
         public Game AddGame()
         {
             Game newGame = new Game(this._id);
-            _count +=1;
+            this.AddCount();
             return newGame;
         }
 
@@ -98,11 +135,12 @@ namespace LemonadeStand
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("INSERT INTO players (username, password, money) OUTPUT INSERTED.id VALUES (@Username, @Password, @Money);", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO players (username, password, money, count) OUTPUT INSERTED.id VALUES (@Username, @Password, @Money, @Count);", conn);
 
             cmd.Parameters.Add(new SqlParameter("@Username", this.GetUsername()));
             cmd.Parameters.Add(new SqlParameter("@Password", this.GetPassword()));
             cmd.Parameters.Add(new SqlParameter("@Money", this.GetMoney()));
+            cmd.Parameters.Add(new SqlParameter("@Count", this.GetCount()));
 
             SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -134,7 +172,7 @@ namespace LemonadeStand
             cmd.ExecuteNonQuery();
 
             _count = 0;
-            _money = 20m; 
+            _money = 20m;
 
             if (conn != null)
             {
@@ -186,6 +224,7 @@ namespace LemonadeStand
             string username = null;
             string password = null;
             decimal money = 0m;
+            int count = 0;
 
             while(rdr.Read())
             {
@@ -193,10 +232,12 @@ namespace LemonadeStand
                 username = rdr.GetString(1);
                 password = rdr.GetString(2);
                 money = rdr.GetDecimal(3);
+                count = rdr.GetInt32(4);
             }
 
             Player foundPlayer = new Player(username, password, id);
             foundPlayer._money = money;
+            foundPlayer._count = count;
             if(rdr != null)
             {
                 rdr.Close();
