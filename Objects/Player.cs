@@ -62,6 +62,11 @@ namespace LemonadeStand
           return _count;
         }
 
+        public void SetCount()
+        {
+          _count = 0;
+        }
+
         public void SetMoney(decimal money)
         {
             _money = money;
@@ -84,7 +89,7 @@ namespace LemonadeStand
         public Game AddGame()
         {
             Game newGame = new Game(this._id);
-            _count +=1; 
+            _count +=1;
             return newGame;
         }
 
@@ -129,6 +134,7 @@ namespace LemonadeStand
             cmd.ExecuteNonQuery();
 
             _count = 0;
+            _money = 20m; 
 
             if (conn != null)
             {

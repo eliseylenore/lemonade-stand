@@ -17,6 +17,7 @@ namespace LemonadeStand
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 Player newPlayer = new Player(Request.Form["username"], Request.Form["password"]);
                 newPlayer.Save();
+                newPlayer.SetCount();
                 Game playerGame = newPlayer.AddGame();
                 decimal pricePerPitcher = playerGame.GetPitcherPrice();
                 decimal playerMoney = newPlayer.GetMoney();
@@ -31,6 +32,7 @@ namespace LemonadeStand
                 //TODO: fix this code so that page only displays and game is only created if foundPlayer exists; maybe catch certain cases
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 Player foundPlayer = Player.Search(Request.Form["username"], Request.Form["password"]);
+                foundPlayer.SetCount(); 
                 Game playerGame = foundPlayer.AddGame();
                 decimal pricePerPitcher = playerGame.GetPitcherPrice();
                 decimal playerMoney = foundPlayer.GetMoney();
