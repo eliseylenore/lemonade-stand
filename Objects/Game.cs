@@ -9,6 +9,7 @@ namespace LemonadeStand
         private static List<Game> _games = new List<Game> {};
         private int _id;
         private Player _player;
+        private int _playerId;
         private int _temperature;
         private decimal _pitcherPrice;
         private int _cupsPerPitcher;
@@ -19,6 +20,7 @@ namespace LemonadeStand
         public Game(int PlayerId)
         {
             _id = _games.Count;
+            _playerId = PlayerId;
             _player = Player.Find(PlayerId);
             _games.Add(this);
             _temperature = rnd.Next(30,100);
@@ -31,8 +33,10 @@ namespace LemonadeStand
         {
             return _id;
         }
+        //Must call Player.Find in this method as opposed to just once, when the game object is created, to get most updated version of player object
         public Player GetPlayer()
         {
+            _player = Player.Find(_playerId);
             return _player;
         }
 

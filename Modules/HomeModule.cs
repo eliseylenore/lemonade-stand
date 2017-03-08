@@ -18,7 +18,6 @@ namespace LemonadeStand
                 Player newPlayer = new Player(Request.Form["username"], Request.Form["password"]);
                 newPlayer.Save();
                 Game playerGame = newPlayer.AddGame();
-                Console.WriteLine(playerGame.GetId());
                 decimal pricePerPitcher = playerGame.GetPitcherPrice();
                 decimal playerMoney = newPlayer.GetMoney();
                 int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
@@ -48,7 +47,7 @@ namespace LemonadeStand
             Post["/results"] = _ => {
               Game foundGame = Game.Find(Request.Form["game-id"]);
               Player foundGamePlayer = foundGame.GetPlayer();
-              Console.WriteLine(foundGamePlayer.GetCount());
+              Console.WriteLine("results count: "+foundGamePlayer.GetCount());
               Dictionary<string, object> model = foundGame.Play(Request.Form["cup"], Request.Form["pitcher"], foundGamePlayer);
               model.Add("game", foundGame);
               model.Add("count", foundGamePlayer.GetCount());
@@ -58,13 +57,13 @@ namespace LemonadeStand
             Post["/another/game"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 Player foundPlayer = Player.Find(Request.Form["player-id"]);
-                Console.WriteLine("count"+foundPlayer.GetCount());
-                if(foundPlayer.GetCount() > 7)
+                Console.WriteLine("another game count: "+foundPlayer.GetCount());
+                if(foundPlayer.GetCount() >= 7)
                 {
                   foundPlayer.SaveScore();
                   foundPlayer.ResetMoneyAndCount();
-                  model.Add("count", foundPlayer.GetCount());
                   Game playerGame = foundPlayer.AddGame();
+                  model.Add("count", foundPlayer.GetCount());
                   decimal pricePerPitcher = playerGame.GetPitcherPrice();
                   decimal playerMoney = foundPlayer.GetMoney();
                   int limit = Convert.ToInt32(playerMoney/pricePerPitcher);

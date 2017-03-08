@@ -63,16 +63,23 @@ namespace LemonadeStand
           return _count;
         }
 
+        public Game AddGame()
+        {
+            Game newGame = new Game(this._id);
+            this.AddCount();
+            return newGame;
+        }
+
         public void AddCount()
         {
-          _count = _count + 1;
+          this._count ++;
           SqlConnection conn = DB.Connection();
           conn.Open();
 
           SqlCommand cmd = new SqlCommand("UPDATE players SET count=@Count WHERE id = @PlayerId;", conn);
 
           cmd.Parameters.Add(new SqlParameter("@PlayerId", this.GetId()));
-          cmd.Parameters.Add(new SqlParameter("@Count", _count));
+          cmd.Parameters.Add(new SqlParameter("@Count", this._count.ToString()));
 
           cmd.ExecuteNonQuery();
 
@@ -123,12 +130,6 @@ namespace LemonadeStand
 
         }
 
-        public Game AddGame()
-        {
-            Game newGame = new Game(this._id);
-            this.AddCount();
-            return newGame;
-        }
 
         public void Save()
         {
@@ -140,7 +141,7 @@ namespace LemonadeStand
             cmd.Parameters.Add(new SqlParameter("@Username", this.GetUsername()));
             cmd.Parameters.Add(new SqlParameter("@Password", this.GetPassword()));
             cmd.Parameters.Add(new SqlParameter("@Money", this.GetMoney()));
-            cmd.Parameters.Add(new SqlParameter("@Count", this.GetCount()));
+            cmd.Parameters.Add(new SqlParameter("@Count", this.GetCount().ToString()));
 
             SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -171,7 +172,7 @@ namespace LemonadeStand
 
             cmd.ExecuteNonQuery();
 
-            _count = 1;
+            _count = 0;
             _money = 20m;
 
             if (conn != null)
