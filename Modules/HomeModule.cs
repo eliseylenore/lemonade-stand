@@ -26,13 +26,14 @@ namespace LemonadeStand
                 model.Add("player", newPlayer);
                 model.Add("count", newPlayer.GetCount());
                 return View["Game.cshtml", model];
+
             };
             //if player is returning player
             Post["/returning-user/game"] = _ => {
                 //TODO: fix this code so that page only displays and game is only created if foundPlayer exists; maybe catch certain cases
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 Player foundPlayer = Player.Search(Request.Form["username"], Request.Form["password"]);
-                if(foundPlayer.GetUsername() != null)
+                if(foundPlayer.GetUsername() != null || foundPlayer.GetPassword() != null)
                 {
                     foundPlayer.ResetMoneyAndCount();
                     Game playerGame = foundPlayer.AddGame();
@@ -76,29 +77,29 @@ namespace LemonadeStand
                 Player foundPlayer = Player.Find(Request.Form["player-id"]);
                 if(foundPlayer.GetCount() >= 7)
                 {
-                  foundPlayer.SaveScore();
-                  foundPlayer.ResetMoneyAndCount();
-                  Game playerGame = foundPlayer.AddGame();
-                  model.Add("count", foundPlayer.GetCount());
-                  decimal pricePerPitcher = playerGame.GetPitcherPrice();
-                  decimal playerMoney = foundPlayer.GetMoney();
-                  int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
-                  model.Add("limit", limit);
-                  model.Add("game", playerGame);
-                  model.Add("player", foundPlayer);
-                  return View["Game.cshtml", model];
+                    foundPlayer.SaveScore();
+                    foundPlayer.ResetMoneyAndCount();
+                    Game playerGame = foundPlayer.AddGame();
+                    model.Add("count", foundPlayer.GetCount());
+                    decimal pricePerPitcher = playerGame.GetPitcherPrice();
+                    decimal playerMoney = foundPlayer.GetMoney();
+                    int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
+                    model.Add("limit", limit);
+                    model.Add("game", playerGame);
+                    model.Add("player", foundPlayer);
+                    return View["Game.cshtml", model];
                 }
                 else
                 {
-                  Game playerGame = foundPlayer.AddGame();
-                  decimal pricePerPitcher = playerGame.GetPitcherPrice();
-                  decimal playerMoney = foundPlayer.GetMoney();
-                  int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
-                  model.Add("limit", limit);
-                  model.Add("game", playerGame);
-                  model.Add("player", foundPlayer);
-                  model.Add("count", foundPlayer.GetCount());
-                  return View["Game.cshtml", model];
+                    Game playerGame = foundPlayer.AddGame();
+                    decimal pricePerPitcher = playerGame.GetPitcherPrice();
+                    decimal playerMoney = foundPlayer.GetMoney();
+                    int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
+                    model.Add("limit", limit);
+                    model.Add("game", playerGame);
+                    model.Add("player", foundPlayer);
+                    model.Add("count", foundPlayer.GetCount());
+                    return View["Game.cshtml", model];
                 }
             };
 
