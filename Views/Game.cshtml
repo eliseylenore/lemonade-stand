@@ -4,11 +4,8 @@
 
 <div class="beach-background">
     <div class="nav">
-                <div class="orange">
-                    <div>
-                        <h1 class="fancy">Weather Forecast: </h1>
-                    </div>
-                        <h2>@Model["game"].GetTemperature()&degF and @Model["game"].GetForecast()</h2>
+                <div class="orange container">
+                        <h1><span class="fancy">Weather Forecast:</span> @Model["game"].GetTemperature()&degF and @Model["game"].GetForecast()</h1>
                             <h1>Cost Per Pitcher: $<span id="pitcher-price">@Model["game"].GetPitcherPrice()</span></h1>
                         <h2>You're playing as: @Model["player"].GetUsername()   </h2>
                 </div>
@@ -28,15 +25,21 @@
                             </div>
                             <div class="form-group">
                                 <label for="pitcher">Number of Pitchers</label>
-                                <input class="form-control pitcher" id="tiny-input" type="number" name="pitcher" min="1" max="@Model["limit"]">
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input class="form-control pitcher" id="tiny-input" type="number" name="pitcher" min="1" max="@Model["limit"]">
+                                </div>
                             </div>
-                            <input type="hidden" name="game-id" value="@Model["game"].GetId()">
-                            <button class="btn btn-small btn-info" id="tiny-input" type="submit" name="submit">Play!</button>
+                                <input type="hidden" name="game-id" value="@Model["game"].GetId()">
+                            <div class="row">
+                                <div class="col-xs-9">
+                                </div>
+                                <button class="btn btn-sm btn-info col-xs-3" id="tiny-input" type="submit" name="submit">Play!</button>
+                            </div>
                         </form>
 
                 </div>
             </div>
-
         </div>
     </div>
 </div>

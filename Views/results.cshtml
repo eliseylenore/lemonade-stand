@@ -2,22 +2,28 @@
     Layout = "Shared/_Layout.cshtml";
 }
 
-<div class="container">
-  <h1 class="fancy">Day @Model["count"] Results</h1>
-  <h2>Good job, you made it through another day! Here's how you did:</h2>
-  <h3>Cups Sold: @Model["cupsSold"]</h3>
-  <h3 id="results-money-made">Money Made: @Model["profitString"]</h3>
-  <h3>Total Funds Available: @Model["remainingString"]</h3>
-  <form action="/another/game" method="post">
-      <input type="hidden" name="player-id" value="@Model["game"].GetPlayer().GetId()">
-      <button type="submit" class="btn btn-info" name="button">Next</button>
-  </form>
-  <form action="/start-over" method="post">
-      <input type="hidden" name="player-id" value="@Model["game"].GetPlayer().GetId()">
-      <button type="submit" class="btn btn-danger" name="button">End Game</button>
-  </form>
-  @if(@Model["you-lose"] != null)
-  {
-    <h2>You lose!</h2>
-  }
+<div class="evening-wallpaper">
+    <div class="container">
+        <div class="results backdrop">
+            <h1 class="fancy">Day @Model["count"] Results</h1>
+            <h2>Good job, you made it through another day! Here's how you did:</h2>
+            <h3>Cups Sold: @Model["cupsSold"]</h3>
+            <h3 id="results-money-made">Money Made: @Model["profitString"]</h3>
+            <h3>Total Funds Available: @Model["remainingString"]</h3>
+            <form action="/another/game" method="post">
+                <input type="hidden" name="player-id" value="@Model["game"].GetPlayer().GetId()">
+                <button type="submit" class="btn btn-info" name="button">Next</button>
+            </form>
+            <form action="/start-over" method="post">
+                <input type="hidden" name="player-id" value="@Model["game"].GetPlayer().GetId()">
+                <button type="submit" class="btn btn-danger" name="button">End Game</button>
+            </form>
+            @if(@Model["you-lose"] != null)
+            {
+                <h2>You lose!</h2>
+            }
+        </div>
+        <img class="cashmoney" src="../Content/img/money.png">
+        <img class="beyonce2" src="../Content/img/beyonce2.png" alt="">
+    </div>
 </div>

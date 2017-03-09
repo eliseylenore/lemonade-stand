@@ -76,10 +76,20 @@ form {
 
 .nav h1, .nav h2 {
 	display: inline-block;
+	font-size: 24px;
+	padding-right: 20px;
+}
+
+.nav h2 {
+	float: right;
+	font-size: 15px;
 }
 
 .beach-background {
 	background: url("../img/beach.jpg") no-repeat center center fixed;
+}
+.beach-background, .evening-wallpaper {
+	min-height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -96,6 +106,7 @@ form {
 #small-input, #tiny-input {
 	width: 75px;
 }
+
 .stand {
 	height: 80vh;
 	z-index: 10;
@@ -114,10 +125,10 @@ form {
 }
 
 .prices {
-	padding-top: 15px;
+	padding-top: 75px;
 	padding-bottom: 5px;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
 	border-radius: 25px;
 }
 
@@ -129,8 +140,8 @@ form {
 	font-family: 'Fredoka One', cursive;
 	color: white;
 	position: absolute;
-	left: 40%;
-	top: 60%;
+	left: 34.5%;
+	top: 65%;
 	z-index: 200;
 }
 
@@ -151,14 +162,54 @@ button#tiny-input {
 	display: block;
 }
 
+.chalkboard .btn-info {
+	background-color: #EE7600;
+	border-color: #d14900;
+}
+
+.chalkboard .btn-info:hover {
+	background-color: #d14900;
+	border-color: #d14900;
+}
+
+
 .chalkboard h3 {
 	margin-top: 3em;
+	text-align: center;
 }
 
 /*.weather {
 	background: url("../img/rain.png") no-repeat center center;
 	background-size: 55%;
 }*/
+
+/************Results Page************/
+.evening-wallpaper{
+	background: url("../img/evening-wallpaper.jpg") no-repeat center center fixed;
+}
+
+.results {
+	position: absolute;
+	left: 15%;
+	top: 20%;
+	z-index: 100;
+}
+
+.beyonce2 {
+	position: absolute;
+	left: 55%;
+	top: 0;
+	z-index: 200;
+}
+
+.cashmoney {
+	position: absolute;
+	left: 55%;
+	top: 10%;
+	z-index: 150;
+}
+
+
 
 /************Submit Button************/
 .lemonsubmit
@@ -171,7 +222,6 @@ button#tiny-input {
 	border:			none;
 	text-indent:		-999em;
 }
-
 
 
 /*CSS For View Transition*/
