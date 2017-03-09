@@ -70,7 +70,7 @@ namespace LemonadeStand
                 model.Add("count", foundGamePlayer.GetCount());
                 foundGamePlayer.ResetMoneyAndCount();
                 model.Add("you-lose", true);
-                return View["results.cshtml", model]; 
+                return View["results.cshtml", model];
                }
               List<decimal> allScores = foundGamePlayer.GetScores();
               if(allScores.Count > 0)
@@ -83,7 +83,7 @@ namespace LemonadeStand
                   model.Add("averageScore", model["remainingMoney"]);
               }
                  return View["results.cshtml", model];
-              }
+
             };
 
             Post["/another/game"] = _ => {

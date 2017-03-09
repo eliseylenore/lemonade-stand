@@ -108,10 +108,10 @@ namespace LemonadeStand
             Console.WriteLine("temp " + playerGame.GetTemperature());
             Console.WriteLine("cupsSold " + results["cupsSold"]);
             Console.WriteLine("profitString " + results["profitString"]);
-            Console.WriteLine("remainingString " + results["remainingString"]);
+            Console.WriteLine("availableString " + results["availableString"]);
 
             Console.WriteLine(startingMoney);
-            Console.WriteLine(endingMoney); 
+            Console.WriteLine(endingMoney);
 
             bool testBool = (startingMoney > endingMoney);
             Assert.Equal(true, testBool);
