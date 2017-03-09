@@ -114,7 +114,7 @@ namespace LemonadeStand
             decimal remainingMoney = startingMoney - totalAmountSpent;
             gamePlayer.SetMoney(remainingMoney);
 
-            decimal availableFunds = startingMoney - totalAmountSpent + profit;
+            decimal availableFunds = startingMoney + profit;
             gamePlayer.SetMoney(availableFunds);
             string availableString = String.Format("{0:C}", availableFunds);
 
