@@ -125,7 +125,6 @@ namespace LemonadeStand
             play.Add("profit", profit);
             play.Add("profitString", profitString);
             play.Add("remainingMoney", remainingMoney);
-            play.Add("remainingString", remainingString);
             play.Add("availableFunds", availableFunds);
             play.Add("availableString", availableString);
             play.Add("you-lose", youlose);

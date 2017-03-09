@@ -58,33 +58,22 @@ namespace LemonadeStand
               Game foundGame = Game.Find(Request.Form["game-id"]);
               Player foundGamePlayer = foundGame.GetPlayer();
               Dictionary<string, object> model = foundGame.Play(Request.Form["cup"], Request.Form["pitcher"], foundGamePlayer);
-              if(foundGamePlayer.GetMoney() > 0m)
-              {
                 model.Add("game", foundGame);
                 model.Add("count", foundGamePlayer.GetCount());
-                return View["results.cshtml", model];
-              }
-              else
-              {
-                model.Add("game", foundGame);
-                model.Add("count", foundGamePlayer.GetCount());
-                foundGamePlayer.ResetMoneyAndCount();
-                model.Add("you-lose", true);
-                return View["results.cshtml", model]; 
-               }
-              List<decimal> allScores = foundGamePlayer.GetScores();
-              if(allScores.Count > 0)
-              {
-                  Dictionary<string, object> averageScore = foundGamePlayer.GetAverageScore();
-                  model.Add("averageScore", averageScore["averageScoreString"]);
-              }
-              else
-              {
-                  model.Add("averageScore", model["remainingMoney"]);
-              }
-                 return View["results.cshtml", model];
-              }
-            };
+              
+                List<decimal> allScores = foundGamePlayer.GetScores();
+                if(allScores.Count > 0)
+                {
+                    Dictionary<string, object> averageScore = foundGamePlayer.GetAverageScore();
+                    model.Add("averageScore", averageScore["averageScoreString"]);
+                }
+                else
+                {
+                    model.Add("averageScore", model["remainingMoney"]);
+                }
+                   return View["results.cshtml", model];
+                };
+
 
             Post["/another/game"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>{};
