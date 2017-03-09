@@ -68,7 +68,12 @@ namespace LemonadeStand
 
             int pricePerCupInt = Convert.ToInt32(pricePerCup * 100);
 
-            int maxBought = (int)(((forecastNumber + 0.5)*(temperature - 30.0))/(3.0 * pricePerCupInt/100));
+            int maxBought =0;
+
+            if(pricePerCupInt < 8)
+            {
+                maxBought = (int)(((((forecastNumber * forecastNumber) * 1.9) + 1.5)*(temperature * 2.7))/(0.7 * pricePerCupInt));
+            }
 
             int cupsPerPitcher = testGame.GetCupsPerPitcher();
             int totalCupsMade = cupsPerPitcher*numberOfPitchers;
@@ -93,11 +98,20 @@ namespace LemonadeStand
             Player testPlayer = new Player("coolgurl123", "password123");
             testPlayer.Save();
             decimal startingMoney = testPlayer.GetMoney();
+            Console.WriteLine(startingMoney);
 
             Game playerGame = testPlayer.AddGame();
-            Dictionary<string, object> results = playerGame.Play(20m, 8, testPlayer);
+            Dictionary<string, object> results = playerGame.Play(20m, 1, testPlayer);
 
             decimal endingMoney = testPlayer.GetMoney();
+            Console.WriteLine("forecast " + playerGame.GetForecast());
+            Console.WriteLine("temp " + playerGame.GetTemperature());
+            Console.WriteLine("cupsSold " + results["cupsSold"]);
+            Console.WriteLine("profitString " + results["profitString"]);
+            Console.WriteLine("remainingString " + results["remainingString"]);
+
+            Console.WriteLine(startingMoney);
+            Console.WriteLine(endingMoney); 
 
             bool testBool = (startingMoney > endingMoney);
             Assert.Equal(true, testBool);

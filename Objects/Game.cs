@@ -89,7 +89,12 @@ namespace LemonadeStand
 
             int pricePerCupInt = Convert.ToInt32(pricePerCup * 100);
 
-            int maxBought = (int)(((forecastNumber + 0.5)*(_temperature - 30.0))/(3.0 * pricePerCupInt/100));
+            int maxBought = 0;
+
+            if(pricePerCupInt < 8)
+            {
+                maxBought = (int)(((((forecastNumber * forecastNumber) * 1.9) + 1.5)*(_temperature * 2.7))/(0.9 * pricePerCupInt));
+            }
 
             int cupsSold = 0;
             if(totalCupsMade <= maxBought)
@@ -106,19 +111,23 @@ namespace LemonadeStand
             decimal profit = totalAmountMade - totalAmountSpent;
             string profitString = String.Format("{0:C}", profit);
 
-            decimal remainingMoney = startingMoney + profit;
+            decimal remainingMoney = startingMoney - totalAmountSpent;
             gamePlayer.SetMoney(remainingMoney);
-            string remainingString = String.Format("{0:C}", remainingMoney);
+
+            decimal availableFunds = startingMoney - totalAmountSpent + profit;
+            gamePlayer.SetMoney(availableFunds);
+            string availableString = String.Format("{0:C}", availableFunds);
 
             string youlose = "You Lose!";
-            //does this save?
 
             Dictionary<string, object> play = new Dictionary<string, object> {};
             play.Add("cupsSold", cupsSold);
             play.Add("profit", profit);
             play.Add("profitString", profitString);
             play.Add("remainingMoney", remainingMoney);
-            play.Add("remainingString", remainingString); 
+            play.Add("remainingString", remainingString);
+            play.Add("availableFunds", availableFunds);
+            play.Add("availableString", availableString);
             play.Add("you-lose", youlose);
 
             return play;
