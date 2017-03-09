@@ -99,6 +99,9 @@ namespace LemonadeStand
 
             decimal endingMoney = testPlayer.GetMoney();
 
+            Console.WriteLine(startingMoney);
+            Console.WriteLine(endingMoney); 
+
             bool testBool = (startingMoney > endingMoney);
             Assert.Equal(true, testBool);
         }

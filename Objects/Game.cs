@@ -106,9 +106,12 @@ namespace LemonadeStand
             decimal profit = totalAmountMade - totalAmountSpent;
             string profitString = String.Format("{0:C}", profit);
 
-            decimal remainingMoney = startingMoney + profit;
+            decimal remainingMoney = startingMoney - totalAmountSpent;
             gamePlayer.SetMoney(remainingMoney);
-            string remainingString = String.Format("{0:C}", remainingMoney);
+
+            decimal availableFunds = startingMoney - totalAmountSpent + profit;
+            gamePlayer.SetMoney(availableFunds);
+            string availableString = String.Format("{0:C}", availableFunds);
 
             string youlose = "You Lose!";
             //does this save?
@@ -118,7 +121,8 @@ namespace LemonadeStand
             play.Add("profit", profit);
             play.Add("profitString", profitString);
             play.Add("remainingMoney", remainingMoney);
-            play.Add("remainingString", remainingString); 
+            play.Add("availableFunds", availableFunds);
+            play.Add("availableString", availableString);
             play.Add("you-lose", youlose);
 
             return play;
