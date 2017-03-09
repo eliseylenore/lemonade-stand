@@ -211,7 +211,7 @@ namespace LemonadeStand
             return AllScores;
         }
 
-        public decimal GetAverageScore()
+        public Dictionary<string, object> GetAverageScore()
         {
             decimal totalScore = 0m;
             decimal count = 0m;
@@ -240,7 +240,12 @@ namespace LemonadeStand
                 conn.Close();
             }
 
-            decimal averageScore = totalScore/count;
+            Dictionary<string, object> averageScore = new Dictionary<string, object>{};
+            decimal averageScoreDecimal = totalScore/count;
+            string averageScoreString = String.Format("{0:C}", averageScoreDecimal);
+            averageScore.Add("averageScoreDecimal", averageScoreDecimal);
+            averageScore.Add("averageScoreString", averageScoreString);
+            
             return averageScore;
         }
 
