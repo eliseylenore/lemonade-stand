@@ -70,6 +70,14 @@ form {
 	text-align: center;
 }
 /************Game Page************/
+.nav {
+	background-color: rgba(255, 255, 255, 0.7);
+}
+
+.nav h1, .nav h2 {
+	display: inline-block;
+}
+
 .beach-background {
 	background: url("../img/beach.jpg") no-repeat center center fixed;
 	background-position: center;
@@ -78,35 +86,40 @@ form {
 	font-family: 'Fredoka One', cursive;
 }
 
+.weather {
+	position: absolute;
+	left: 15%;
+	top: 10%;
+	z-index: 100;
+}
+
 #small-input, #tiny-input {
 	width: 75px;
 }
 
-.lemonade-stand {
-	margin-top: 10%;
-}
 
 .stand {
-	height: 75vh;
+	height: 80vh;
 	z-index: 10;
 	position: absolute;
-	left: 0px;
+	left: 25%;
+	top: 10%
 	z-index: 100;
 }
 
 .beyonce {
 	height: 35vh;
 	position: absolute;
-	left: 200px;
-	top: 125px;
+	left: 35%;
+	top: 35%;
 	z-index: 1;
 }
 
 .prices {
-	padding-top: 5%;
-	padding-bottom: 2%;
-	padding-left: 6%;
-	padding-right: 6%;
+	padding-top: 15px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
 	border-radius: 25px;
 }
 
@@ -118,8 +131,8 @@ form {
 	font-family: 'Fredoka One', cursive;
 	color: white;
 	position: absolute;
-	left: 220px;
-	top: 550px;
+	left: 40%;
+	top: 60%;
 	z-index: 200;
 }
 
@@ -141,7 +154,7 @@ button#tiny-input {
 }
 
 .chalkboard h3 {
-	margin-top: 4em;
+	margin-top: 3em;
 }
 
 /*.weather {

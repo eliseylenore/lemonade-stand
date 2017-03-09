@@ -3,28 +3,23 @@
 }
 
 <div class="beach-background">
-    <div class="container">
-        <div class="row spacing">
-        </div>
-        <div class="row">
-            <div class="orange weather col-md-5">
-                <div class="backdrop">
-                    <h2>Player name: @Model["player"].GetUsername()</h2>
-                    <h1 class="fancy">Weather</h1>
-                    <h2>@Model["game"].GetTemperature()&degF and @Model["game"].GetForecast()</h2>
-
-                    <div class="row">
-                        <h1>Cost Per Pitcher: $<span id="pitcher-price">@Model["game"].GetPitcherPrice()</span></h1>
-
+    <div class="nav">
+                <div class="orange">
+                    <div>
+                        <h1 class="fancy">Weather Forecast: </h1>
                     </div>
+                        <h2>@Model["game"].GetTemperature()&degF and @Model["game"].GetForecast()</h2>
+                            <h1>Cost Per Pitcher: $<span id="pitcher-price">@Model["game"].GetPitcherPrice()</span></h1>
+                        <h2>You're playing as: @Model["player"].GetUsername()   </h2>
                 </div>
-
-            </div>
-            <div class="lemonade-stand col-md-7">
+    </div>
+        <div class="spacing">
+        </div>
+            <div class="lemonade-stand">
                 <img class="stand" src="../Content/img/stand.png"/>
                 <img class="beyonce" src="../Content/img/beyonce.png"/>
                 <div class="prices chalkboard">
-                    <div class="row">
+
                         <h3>You currently have: $<span id="player-money">@Model["player"].GetMoney()</span></h3>
                         <form class="form-inline" action="/results" method="post">
                             <div class="form-group">
@@ -36,9 +31,9 @@
                                 <input class="form-control" id="tiny-input"" type="number" id="pitcher" name="pitcher" min="1" max="@Model["limit"]">
                             </div>
                             <input type="hidden" name="game-id" value="@Model["game"].GetId()">
-                            <button class="btn btn-info" id="tiny-input" type="submit" name="submit">Play!</button>
+                            <button class="btn btn-small btn-info" id="tiny-input" type="submit" name="submit">Play!</button>
                         </form>
-                    </div>
+
                 </div>
             </div>
 
