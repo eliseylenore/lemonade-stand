@@ -68,6 +68,9 @@ namespace LemonadeStand
               Dictionary<string, object> model = foundGame.Play(Request.Form["cup"], Request.Form["pitcher"], foundGamePlayer);
               model.Add("game", foundGame);
               model.Add("count", foundGamePlayer.GetCount());
+              Dictionary<string, object> averageScore = foundGamePlayer.GetAverageScore();
+              model.Add("averageScore", averageScore["averageScoreString"]);
+
             //   if(foundGamePlayer.GetMoney() <= 0m)
             //   {
             //     model.Add("you-lose", true);

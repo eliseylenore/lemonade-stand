@@ -16,6 +16,11 @@
       <input type="hidden" name="player-id" value="@Model["game"].GetPlayer().GetId()">
       <button type="submit" class="btn btn-danger" name="button">End Game</button>
   </form>
+  <h3>Your average score: @Model["averageScore"]</h3>
+
+
+  <!-- lose doesn't work yet -->
+
   @if(@Model["you-lose"] != null)
   {
     <h2>You lose!</h2>
