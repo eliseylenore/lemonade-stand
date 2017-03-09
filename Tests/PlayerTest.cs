@@ -120,6 +120,19 @@ namespace LemonadeStand
 
             Assert.Equal(ExpectedScores, ActualScores);
         }
+        // [Fact]
+        // public void GetAverageScores_Player_PlayersAverageScore()
+        // {
+        //     Player testPlayer = new Player("coolgurl123", "password123");
+        //     testPlayer.Save();
+        //
+        //     Game playerGame1 = testPlayer.AddGame();
+        //     playerGame1.Play(0.6m, 5, testPlayer);
+        //     Game playerGame2 = testPlayer.AddGame();
+        //     playerGame2.Play(0.6m, 5, testPlayer);
+        //     Game playerGame3 = testPlayer.AddGame();
+        //     playerGame3.Play(0.6m, 5, testPlayer);
+        // }
 
         [Fact]
         public void AddGame_WhenPlayerPlaysThreeTimes_ReturnCount3()
@@ -129,12 +142,20 @@ namespace LemonadeStand
 
             Game playerGame1 = testPlayer.AddGame();
             playerGame1.Play(0.6m, 5, testPlayer);
+            testPlayer.SetMoney(0m);
+            testPlayer.SaveScore();
+
             Game playerGame2 = testPlayer.AddGame();
             playerGame2.Play(0.6m, 5, testPlayer);
+            testPlayer.SetMoney(20m);
+            testPlayer.SaveScore();
+
             Game playerGame3 = testPlayer.AddGame();
             playerGame3.Play(0.6m, 5, testPlayer);
+            testPlayer.SetMoney(10m);
+            testPlayer.SaveScore();
 
-            Assert.Equal(3, testPlayer.GetCount());
+            Assert.Equal(10m, testPlayer.GetAverageScore());
         }
 
         [Fact]
@@ -171,6 +192,7 @@ namespace LemonadeStand
         public void Dispose()
         {
             Player.DeleteAll();
+            Game.ClearAll(); 
         }
 
     }

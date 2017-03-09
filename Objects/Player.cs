@@ -211,6 +211,39 @@ namespace LemonadeStand
             return AllScores;
         }
 
+        public decimal GetAverageScore()
+        {
+            decimal totalScore = 0m;
+            decimal count = 0m;
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT score FROM players_scores WHERE player_id = @PlayerId;", conn);
+            cmd.Parameters.Add(new SqlParameter("@PlayerId", this._id));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                decimal score = rdr.GetDecimal(0);
+                totalScore += score;
+                count ++;
+            }
+
+            if(rdr != null)
+            {
+                rdr.Close();
+            }
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+
+            decimal averageScore = totalScore/count;
+            return averageScore;
+        }
+
         public static Player Find(int playerId)
         {
             SqlConnection conn = DB.Connection();
@@ -326,7 +359,7 @@ namespace LemonadeStand
         {
             SqlConnection conn = DB.Connection();
             conn.Open();
-            SqlCommand cmd = new SqlCommand("DELETE FROM players;", conn);
+            SqlCommand cmd = new SqlCommand("DELETE FROM players; DELETE FROM players_scores", conn);
             cmd.ExecuteNonQuery();
             conn.Close();
         }
