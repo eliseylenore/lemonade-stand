@@ -12,10 +12,9 @@ form {
 	display: inline-block;
 	text-align: right;
 }
+
 .fancy {
 	font-family: 'Leckerli One', cursive;
-	font-size: 72px;
-	text-align: center;
 	color: #ff0080;
 }
 
@@ -66,6 +65,10 @@ form {
 	color: #01A9B1;
 }
 
+.big {
+	font-size: 72px;
+	text-align: center;
+}
 /************Game Page************/
 .beach-background {
 	background: url("../img/beach.jpg") no-repeat center center fixed;
@@ -73,6 +76,51 @@ form {
 	background-repeat: no-repeat;
 	background-size: cover;
 	font-family: 'Fredoka One', cursive;
+}
+
+#small-input, #tiny-input {
+	width: 75px;
+}
+
+.lemonade-stand {
+	margin-top: 10%;
+	float: right;
+	align-items: flex-end;
+	position: fixed;
+
+}
+
+.prices {
+	display: flex;
+	flex-direction: column;
+	min-height: 400px;
+	padding-top: 20%;
+	padding-bottom: 10%;
+	padding-left: 10%;
+	padding-right: 10%;
+	border-radius: 25px;
+	margin-top: 50px;
+	float: left;
+}
+
+.form-inline .form-group {
+	display: block;
+	padding-top: 10px;
+}
+
+.chalkboard {
+	min-width: 400px;
+	background: url("../img/chalkboard-menu.jpg") no-repeat center center;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-family: 'Fredoka One', cursive;
+	z-index: 2;
+	color: white;
+}
+
+.chalkboard h3 {
+	margin-top: 50px;
 }
 
 /*.weather {
