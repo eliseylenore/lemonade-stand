@@ -20,15 +20,12 @@
 //   }
 // }, 30);
 
-console.log("hey");
 $(document).ready(function() {
-    console.log("hey");
     var pitchers;
     var costPerPitcher;
     var playerMoney = parseFloat($("#player-money").text()).toFixed(2);
     var newMoney = parseFloat($("#player-money").text()).toFixed(2);
-    $('#pitcher').click(function() {
-        pitchers = parseFloat($('#pitcher').val()).toFixed(2);
+    $('.pitcher').click(function() {pitchers = parseFloat($('.pitcher').val()).toFixed(2);
         costPerPitcher = parseFloat($("#pitcher-price").text()).toFixed(2);
         if(pitchers > 0)
         {
