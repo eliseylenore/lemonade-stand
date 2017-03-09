@@ -89,12 +89,7 @@ namespace LemonadeStand
 
             int pricePerCupInt = Convert.ToInt32(pricePerCup * 100);
 
-            int maxBought = 0;
-
-            if(pricePerCupInt < 8)
-            {
-                maxBought = (int)(((((forecastNumber * forecastNumber) * 1.9) + 1.5)*(_temperature * 2.7))/(0.9 * pricePerCupInt));
-            }
+            int maxBought = (int)(((((forecastNumber * forecastNumber) * 1.9) + 1.5)*(_temperature * 2.7))/(0.9 * pricePerCupInt));
 
             int cupsSold = 0;
             if(totalCupsMade <= maxBought)
