@@ -16,7 +16,7 @@
       <input type="hidden" name="player-id" value="@Model["game"].GetPlayer().GetId()">
       <button type="submit" class="btn btn-danger" name="button">End Game</button>
   </form>
-  @if(@Model["you-lose"] == "true")
+  @if(@Model["you-lose"] != null)
   {
     <h2>You lose!</h2>
   }

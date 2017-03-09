@@ -26,6 +26,7 @@
                         <button type="submit" class="btn btn-info">Submit</button>
 
                     </form>
+
                 </div>
             </div>
             <div class="row sign-in">
@@ -44,7 +45,14 @@
                     </form>
                     @if(@Model != null)
                     {
-                        <h4 id="login-fail">Password or username is incorrect. Please try again</h4>
+                        @if(@Model == "duplicate")
+                        {
+                            <h4 id="login-fail">Username already taken. Try another one</h4>
+                        }
+                        @if(@Model == "login-fail")
+                        {
+                            <h4 id="login-fail">Password or username is incorrect. Please try again</h4>
+                        }
                     }
                 </div>
             </div>
