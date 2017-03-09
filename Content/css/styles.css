@@ -84,43 +84,59 @@ form {
 
 .lemonade-stand {
 	margin-top: 10%;
-	float: right;
-	align-items: flex-end;
-	position: fixed;
+}
 
+.stand {
+	height: 75vh;
+	z-index: 10;
+	position: absolute;
+	left: 0px;
+	z-index: 100;
+}
+
+.beyonce {
+	height: 35vh;
+	position: absolute;
+	left: 200px;
+	top: 125px;
+	z-index: 1;
 }
 
 .prices {
-	display: flex;
-	flex-direction: column;
-	min-height: 400px;
-	padding-top: 20%;
-	padding-bottom: 10%;
-	padding-left: 10%;
-	padding-right: 10%;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	padding-left: 5%;
+	padding-right: 5%;
 	border-radius: 25px;
-	margin-top: 50px;
-	float: left;
-}
-
-.form-inline .form-group {
-	display: block;
-	padding-top: 10px;
 }
 
 .chalkboard {
-	min-width: 400px;
-	background: url("../img/chalkboard-menu.jpg") no-repeat center center;
+	background: url("../img/chalkboard-menu.jpg") no-repeat center fixed;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
 	font-family: 'Fredoka One', cursive;
-	z-index: 2;
 	color: white;
+	position: absolute;
+	left: 230px;
+	top: 550px;
+	z-index: 200;
+}
+
+.chalkboard .form-inline .form-group {
+	padding-top: 10px;
+}
+
+.chalkboard .form-inline .form-control {
+	display: inline-block;
+}
+
+button#tiny-input {
+	display: block;
 }
 
 .chalkboard h3 {
-	margin-top: 50px;
+	margin-top: 3em;
 }
 
 /*.weather {
