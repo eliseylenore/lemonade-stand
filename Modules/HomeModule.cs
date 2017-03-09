@@ -57,15 +57,23 @@ namespace LemonadeStand
               Game foundGame = Game.Find(Request.Form["game-id"]);
               Player foundGamePlayer = foundGame.GetPlayer();
               Dictionary<string, object> model = foundGame.Play(Request.Form["cup"], Request.Form["pitcher"], foundGamePlayer);
-              model.Add("game", foundGame);
-              model.Add("count", foundGamePlayer.GetCount());
-              return View["results.cshtml", model];
+              if(foundGamePlayer.GetMoney() > 0m)
+              {
+                model.Add("game", foundGame);
+                model.Add("count", foundGamePlayer.GetCount());
+                return View["results.cshtml", model];
+              }
+              else
+              {
+                foundGamePlayer.ResetMoneyAndCount();
+                 model.Add("you-lose", "true");
+                 return View["results.cshtml", model];
+              }
             };
 
             Post["/another/game"] = _ => {
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 Player foundPlayer = Player.Find(Request.Form["player-id"]);
-                Console.WriteLine("another game count: "+foundPlayer.GetCount());
                 if(foundPlayer.GetCount() >= 7)
                 {
                   foundPlayer.SaveScore();
