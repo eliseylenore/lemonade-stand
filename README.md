@@ -16,7 +16,7 @@ In SQLMD:
 * _> GO_
 * _> USE lemonade_stand;_
 * _> GO_
-* _> CREATE TABLE players (id INT IDENTITY(1,1), username VARCHAR(255), password VARCHAR(255), money DECIMAL(9,2));_
+* _> CREATE TABLE players (id INT IDENTITY(1,1), username VARCHAR(255), password VARCHAR(255), money DECIMAL(9,2), count INT);_
 * _> GO_
 * _> CREATE TABLE players_scores (id INT IDENTITY(1,1), player_id INT, score DECIMAL(9,2));_
 * _> GO_
