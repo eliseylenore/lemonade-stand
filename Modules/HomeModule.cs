@@ -69,7 +69,19 @@ namespace LemonadeStand
                 model.Add("game", foundGame);
                 model.Add("count", foundGamePlayer.GetCount());
                 foundGamePlayer.ResetMoneyAndCount();
-                 model.Add("you-lose", true);
+                model.Add("you-lose", true);
+                return View["results.cshtml", model]; 
+               }
+              List<decimal> allScores = foundGamePlayer.GetScores();
+              if(allScores.Count > 0)
+              {
+                  Dictionary<string, object> averageScore = foundGamePlayer.GetAverageScore();
+                  model.Add("averageScore", averageScore["averageScoreString"]);
+              }
+              else
+              {
+                  model.Add("averageScore", model["remainingMoney"]);
+              }
                  return View["results.cshtml", model];
               }
             };

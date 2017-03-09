@@ -156,22 +156,12 @@ namespace LemonadeStand
             testPlayer.Save();
 
             Game playerGame1 = testPlayer.AddGame();
-            playerGame1.Play(0.6m, 5, testPlayer);
-            testPlayer.SetMoney(0m);
-            testPlayer.SaveScore();
 
             Game playerGame2 = testPlayer.AddGame();
-            playerGame2.Play(0.6m, 5, testPlayer);
-            testPlayer.SetMoney(20m);
-            testPlayer.SaveScore();
 
             Game playerGame3 = testPlayer.AddGame();
-            playerGame3.Play(0.6m, 5, testPlayer);
-            testPlayer.SetMoney(10m);
-            testPlayer.SaveScore();
 
-            Dictionary<string, object> actual = testPlayer.GetAverageScore();
-            Assert.Equal(10m, actual["averageScoreDecimal"]);
+            Assert.Equal(3, testPlayer.GetCount());
         }
 
         [Fact]
