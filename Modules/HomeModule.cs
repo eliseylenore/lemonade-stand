@@ -32,16 +32,25 @@ namespace LemonadeStand
                 //TODO: fix this code so that page only displays and game is only created if foundPlayer exists; maybe catch certain cases
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 Player foundPlayer = Player.Search(Request.Form["username"], Request.Form["password"]);
-                foundPlayer.ResetMoneyAndCount();
-                Game playerGame = foundPlayer.AddGame();
-                decimal pricePerPitcher = playerGame.GetPitcherPrice();
-                decimal playerMoney = foundPlayer.GetMoney();
-                int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
-                model.Add("limit", limit);
-                model.Add("game", playerGame);
-                model.Add("player", foundPlayer);
-                model.Add("count", foundPlayer.GetCount());
-                return View["Game.cshtml", model];
+                if(foundPlayer.GetUsername() != null)
+                {
+                    foundPlayer.ResetMoneyAndCount();
+                    Game playerGame = foundPlayer.AddGame();
+                    decimal pricePerPitcher = playerGame.GetPitcherPrice();
+                    decimal playerMoney = foundPlayer.GetMoney();
+                    int limit = Convert.ToInt32(playerMoney/pricePerPitcher);
+                    model.Add("limit", limit);
+                    model.Add("game", playerGame);
+                    model.Add("player", foundPlayer);
+                    model.Add("count", foundPlayer.GetCount());
+                    return View["Game.cshtml", model];
+                }
+                else
+                {
+                    //this is for a failed login
+                    model.Add("login-fail", true);
+                    return View["index.cshtml", model];
+                }
             };
 
             Post["/results"] = _ => {

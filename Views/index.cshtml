@@ -41,6 +41,10 @@
                         </div>
                         <button type="submit" class="btn btn-info">Submit</button>
                     </form>
+                    @if(@Model != null && @Model["login-fail"] == true)
+                    {
+                        <h4 id="login-fail">password or username is incorrect. Please try agin</h4>
+                    }
                 </div>
             </div>
         </div>
