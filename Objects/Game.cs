@@ -104,6 +104,7 @@ namespace LemonadeStand
             decimal totalAmountMade = cupsSold*pricePerCup;
 
             decimal profit = totalAmountMade - totalAmountSpent;
+            string profitString = String.Format("{0:C}", profit);
 
             decimal remainingMoney = startingMoney + profit;
             gamePlayer.SetMoney(remainingMoney);
@@ -112,6 +113,7 @@ namespace LemonadeStand
             Dictionary<string, object> play = new Dictionary<string, object> {};
             play.Add("cupsSold", cupsSold);
             play.Add("profit", profit);
+            play.Add("profitString", profitString);
             play.Add("remainingMoney", remainingMoney);
 
             return play;

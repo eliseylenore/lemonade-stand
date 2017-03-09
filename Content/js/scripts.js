@@ -20,7 +20,6 @@
 //   }
 // }, 30);
 
-
 $(document).ready(function() {
     var pitchers;
     var costPerPitcher;

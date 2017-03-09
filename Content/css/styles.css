@@ -84,9 +84,9 @@ form {
 
 .lemonade-stand {
 	margin-top: 10%;
-	float: right;
 	align-items: flex-end;
 	position: fixed;
+	display: none;
 
 }
 
