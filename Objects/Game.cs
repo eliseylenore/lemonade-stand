@@ -89,7 +89,7 @@ namespace LemonadeStand
 
             int pricePerCupInt = Convert.ToInt32(pricePerCup * 100);
 
-            int maxBought =0;
+            int maxBought = 0;
 
             if(pricePerCupInt < 8)
             {
