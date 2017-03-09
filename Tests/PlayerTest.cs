@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace LemonadeStand
 {
@@ -104,7 +105,7 @@ namespace LemonadeStand
         }
 
         [Fact]
-        public void SaveScore_SavesScoreInDatabase()
+        public void SaveScore_SavesScoreInDatabase_GetScores()
         {
             Player testPlayer = new Player("coolgurl123", "password123");
             testPlayer.Save();
@@ -120,19 +121,33 @@ namespace LemonadeStand
 
             Assert.Equal(ExpectedScores, ActualScores);
         }
-        // [Fact]
-        // public void GetAverageScores_Player_PlayersAverageScore()
-        // {
-        //     Player testPlayer = new Player("coolgurl123", "password123");
-        //     testPlayer.Save();
-        //
-        //     Game playerGame1 = testPlayer.AddGame();
-        //     playerGame1.Play(0.6m, 5, testPlayer);
-        //     Game playerGame2 = testPlayer.AddGame();
-        //     playerGame2.Play(0.6m, 5, testPlayer);
-        //     Game playerGame3 = testPlayer.AddGame();
-        //     playerGame3.Play(0.6m, 5, testPlayer);
-        // }
+
+        [Fact]
+        public void GetAverageScores_Player_PlayersAverageScore()
+        {
+            Player testPlayer = new Player("coolgurl123", "password123");
+            testPlayer.Save();
+
+            Game playerGame1 = testPlayer.AddGame();
+            playerGame1.Play(0.6m, 5, testPlayer);
+            decimal game1Score = testPlayer.GetMoney();
+            testPlayer.SaveScore();
+
+            Game playerGame2 = testPlayer.AddGame();
+            playerGame2.Play(0.6m, 5, testPlayer);
+            decimal game2Score = testPlayer.GetMoney();
+            testPlayer.SaveScore();
+
+            Game playerGame3 = testPlayer.AddGame();
+            playerGame3.Play(0.6m, 5, testPlayer);
+            decimal game3Score = testPlayer.GetMoney();
+            testPlayer.SaveScore();
+
+            decimal expected = (game3Score + game2Score + game1Score) / 3m;
+
+            Dictionary<string, object> actual = testPlayer.GetAverageScore();
+            Assert.Equal(expected, actual["averageScoreDecimal"]);
+        }
 
         [Fact]
         public void AddGame_WhenPlayerPlaysThreeTimes_ReturnCount3()
@@ -155,7 +170,8 @@ namespace LemonadeStand
             testPlayer.SetMoney(10m);
             testPlayer.SaveScore();
 
-            Assert.Equal(10m, testPlayer.GetAverageScore());
+            Dictionary<string, object> actual = testPlayer.GetAverageScore();
+            Assert.Equal(10m, actual["averageScoreDecimal"]);
         }
 
         [Fact]
@@ -192,7 +208,7 @@ namespace LemonadeStand
         public void Dispose()
         {
             Player.DeleteAll();
-            Game.ClearAll(); 
+            Game.ClearAll();
         }
 
     }
