@@ -20,9 +20,7 @@
 //   }
 // }, 30);
 
-console.log("hey");
 $(document).ready(function() {
-    console.log("hey");
     var pitchers;
     var costPerPitcher;
     var playerMoney = parseFloat($("#player-money").text()).toFixed(2);

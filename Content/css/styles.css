@@ -87,7 +87,7 @@ form {
 	float: right;
 	align-items: flex-end;
 	position: fixed;
-
+	display: none;
 }
 
 .prices {
