@@ -5,7 +5,26 @@
 <div class="beach-background">
     <div class="nav">
                 <div class="orange container">
-                        <h1><span class="fancy">Weather Forecast:</span> @Model["game"].GetTemperature()&degF and @Model["game"].GetForecast()</h1>
+                        <h1>
+                            <span class="fancy">Weather Forecast:</span> @Model["game"].GetTemperature()&degF and @Model["game"].GetForecast()
+                            @if (@Model["game"].GetForecast() == "rain")
+                            {
+                                <img src="../Content/img/rain.png" alt="rain">
+                            }
+                            @if (@Model["game"].GetForecast() == "cloudy")
+                            {
+                                <img src="../Content/img/cloudy.png" alt="partly-cloudy">
+                            }
+                            @if (@Model["game"].GetForecast() == "partly cloudy")
+                            {
+                                <img src="../Content/img/partly-cloudy.png" alt="partly-cloudy">
+                            }
+                            @if (@Model["game"].GetForecast() == "sunny")
+                            {
+                                <img src="../Content/img/sunny.png" alt="sunny">
+                            }
+                        </h1>
+
                             <h1>Cost Per Pitcher: $<span id="pitcher-price">@Model["game"].GetPitcherPrice()</span></h1>
                         <h2>You're playing as: @Model["player"].GetUsername()   </h2>
                 </div>

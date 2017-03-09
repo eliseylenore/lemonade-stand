@@ -85,6 +85,10 @@ form {
 	font-size: 15px;
 }
 
+.nav img {
+	max-width: 25px;
+}
+
 .beach-background {
 	background: url("../img/beach.jpg") no-repeat center center fixed;
 }
