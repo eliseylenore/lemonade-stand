@@ -68,7 +68,7 @@ namespace LemonadeStand
 
             int pricePerCupInt = Convert.ToInt32(pricePerCup * 100);
 
-            int maxBought = (forecastNumber*temperature)/pricePerCupInt;
+            int maxBought = (int)(((forecastNumber + 0.5)*(temperature - 30.0))/(3.0 * pricePerCupInt/100));
 
             int cupsPerPitcher = testGame.GetCupsPerPitcher();
             int totalCupsMade = cupsPerPitcher*numberOfPitchers;
@@ -88,16 +88,6 @@ namespace LemonadeStand
         }
 
         [Fact]
-        public static void Find_ReturnsGameBasedOnId()
-        {
-            Game testGame = new Game(1);
-
-            Game result = Game.Find(testGame.GetId());
-
-            Assert.Equal(testGame, result);
-        }
-
-        [Fact]
         public void Play_PlayerGame_RemainingMoneyLessThanStartingMoney()
         {
             Player testPlayer = new Player("coolgurl123", "password123");
@@ -111,6 +101,16 @@ namespace LemonadeStand
 
             bool testBool = (startingMoney > endingMoney);
             Assert.Equal(true, testBool);
+        }
+
+        [Fact]
+        public static void Find_ReturnsGameBasedOnId()
+        {
+            Game testGame = new Game(1);
+
+            Game result = Game.Find(testGame.GetId());
+
+            Assert.Equal(testGame, result);
         }
 
         [Fact]
@@ -136,7 +136,8 @@ namespace LemonadeStand
 
         public void Dispose()
         {
-
+            Player.DeleteAll();
+            Game.ClearAll();
         }
     }
 }
