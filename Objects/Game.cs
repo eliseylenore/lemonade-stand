@@ -117,6 +117,11 @@ namespace LemonadeStand
             return play;
         }
 
+        public static void ClearAll()
+        {
+          _games.Clear();
+        }
+
         //Save method that saves player's money into score table in database
     }
 }
