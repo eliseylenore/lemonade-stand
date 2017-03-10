@@ -91,7 +91,6 @@ namespace LemonadeStand
 
             int maxBought = (int)(((((forecastNumber * forecastNumber) * 1.9) + 1.5)*(_temperature * 2.7))/(0.9 * pricePerCupInt));
 
-
             int cupsSold = 0;
             if(totalCupsMade <= maxBought)
             {
