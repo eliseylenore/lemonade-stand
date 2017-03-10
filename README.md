@@ -55,7 +55,7 @@ In SQLMD:
 
 ## Known Bugs
 
-_Not that I know of._
+_If money made is negative number, gets displayed as parenthesis instead of with - in front. Error message if user without account tries to login as returning player does not show up anymore. also, can create duplicate player accounts. Formula for how many cups are sold is off._
 
 ## Support and contact details
 
